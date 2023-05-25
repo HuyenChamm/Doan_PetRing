@@ -1,0 +1,12 @@
+.user p {
+  @apply font-normal mb-5 down_md:text-sm;
+}
+.user h6 {
+  @apply font-semibold down_md:text-sm;
+}
+.user .item-left p {
+  @apply font-semibold;
+}
+.user li {
+  @apply text-left;
+}/*# sourceMappingURL=ProfileUser.css.map */

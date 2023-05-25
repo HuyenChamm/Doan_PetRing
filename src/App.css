@@ -1,0 +1,127 @@
+@import url("https://fonts.googleapis.com/css2?family=Climate+Crisis&family=Oswald:wght@300;400;500;600;700&family=Poppins:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200&display=swap");
+@import 'slick-carousel/slick/slick.css';
+@import 'slick-carousel/slick/slick-theme.css';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@layer base {
+  body {
+    @apply text-base text-orange-400 font-poppins;
+  }
+  body::-moz-selection {
+    @apply text-slate-900 bg-orange-400;
+  }
+  body::selection {
+    @apply text-slate-900 bg-orange-400;
+  }
+  html {
+    @apply m-0;
+  }
+  html,
+  body {
+    @apply overflow-x-hidden bg-white;
+  }
+  h1 {
+    @apply text-4xl font-extrabold md:text-5xl 3xl:text-6xl;
+  }
+  h2 {
+    @apply text-3xl font-extrabold md:text-4xl 3xl:text-5xl;
+  }
+  h3 {
+    @apply text-2xl font-extrabold md:text-3xl 3xl:text-4xl;
+  }
+  h4 {
+    @apply text-xl font-bold md:text-2xl 3xl:text-3xl;
+  }
+  h5 {
+    @apply text-xl font-bold md:text-2xl;
+  }
+  h6 {
+    @apply text-lg font-normal md:text-xl;
+  }
+  small {
+    @apply text-sm;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin-bottom: 16px;
+  }
+  p,
+  li,
+  ol,
+  ul,
+  blockquote,
+  figure {
+    margin: 0 0 15px;
+  }
+  p {
+    margin-bottom: 30px;
+  }
+  .btn_slate {
+    @apply text-white bg-slate-900 font-medium rounded-full text-sm   px-5 py-1 text-center;
+  }
+}
+.login {
+  background-image: url("/public/images/bg.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.link-home {
+  @apply text-orange-600 font-bold;
+}
+
+.register {
+  background-image: url("/public/images/bg.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.user p {
+  @apply font-normal mb-5 down_md:text-sm;
+}
+.user h6 {
+  @apply font-semibold down_md:text-sm;
+}
+.user .item-left p {
+  @apply font-semibold;
+}
+.user li {
+  @apply text-left;
+}
+
+.header .link-active {
+  @apply text-white;
+}
+
+.alert .text {
+  white-space: nowrap;
+  margin-bottom: 0px;
+  overflow: hidden;
+  border-right: 5px solid orangered;
+  animation: typing 2s steps(17) 1, caret 0.5s steps(2) infinite;
+}
+@keyframes caret {
+  from {
+    border-color: transparent;
+  }
+  to {
+    border-color: orangered;
+  }
+}
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+.addpet .age::after {
+  content: "Months";
+}/*# sourceMappingURL=App.css.map */

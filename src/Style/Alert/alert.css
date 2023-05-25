@@ -1,0 +1,23 @@
+.alert .text {
+  white-space: nowrap;
+  margin-bottom: 0px;
+  overflow: hidden;
+  border-right: 5px solid orangered;
+  animation: typing 2s steps(17) 1, caret 0.5s steps(2) infinite;
+}
+@keyframes caret {
+  from {
+    border-color: transparent;
+  }
+  to {
+    border-color: orangered;
+  }
+}
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}/*# sourceMappingURL=alert.css.map */

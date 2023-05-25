@@ -1,0 +1,17 @@
+.user{
+  p{
+    @apply font-normal mb-5 down_md:text-sm ;
+  }
+  h6{
+    @apply font-semibold down_md:text-sm;
+  }
+  
+  .item-left{
+    p{
+      @apply font-semibold;
+    }
+  }
+  li{
+    @apply text-left;
+  }
+}
