@@ -23,3 +23,24 @@ req.session.readTransaction( async tx => {
 })
 
 }
+
+exports.deletePost = (req, res) => {
+  const { idp } = req.query;
+  req.session
+  .run(`
+  MATCH (p:POST) WHERE id(p) = ${idp} DETACH DELETE p RETURN p`)
+  .then(data => {
+   
+    const nodes = data.records.map(record => {
+      return {
+        p: record.get('p').properties,
+    }
+    });
+   
+    res.json({
+      data: nodes
+    })
+  
+  })
+  .catch(error => console.error(error))
+}

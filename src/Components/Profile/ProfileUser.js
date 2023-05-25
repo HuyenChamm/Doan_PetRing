@@ -114,9 +114,7 @@ export default function ProfileUser(props) {
                 </button>
                 <a href='/EditProfilePet'
                   className="text-white shadow-sm shadow-slate-400 bg-slate-700 hover:bg-slate-800 font-medium rounded-md text-sm ml-4  px-5 py-1 text-center mr-3">Add Pet</a>
-                <button type="submit" onClick={openModalEdit}
-                  className="text-white shadow-sm shadow-slate-400 bg-slate-700 hover:bg-slate-800 font-medium rounded-md text-sm   px-5 py-1 text-center">Edit Pet Information
-                </button>
+                
                 <a href='/ProfilePet'
                   className="text-white shadow-sm shadow-slate-400 bg-slate-700 hover:bg-slate-800 font-medium rounded-md text-sm ml-4  px-5 py-1 text-center mr-3">Profile Pet</a>
               </div>

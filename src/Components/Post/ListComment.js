@@ -17,11 +17,11 @@ export default function ListComment(props) {
      
       socket.on("addcomment",(data) => {
         // console.log(data.idp,postId);
-
         if ( +postId === data.idp) {
           setNodes(oldData => [...oldData,data]);
         }
       })
+        
   }, [props.postId])
 
 

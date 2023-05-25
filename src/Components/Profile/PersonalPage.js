@@ -30,15 +30,15 @@ export default function PersonalPage(props) {
           {
           results.map(
             (result) => (
-            <div className='container pb-80'>
+            <div className='container pb-80' key={result.id}>
               <div className=''>
                 <div className='relative'>
                   <div className='bg-slate-800 h-40 rounded-b-md'></div>
-                  <img src="/images/avt_1.jpg" className="mx-auto ml-0 w-20 h-20 md:w-28 md:h-28 left-5 md:left-16 top-32 shadow-md rounded-full shadow-slate-400 absolute" alt="" />
+                  <img src={"/images/" + result.n.avt} className="mx-auto ml-0 w-20 h-20 md:w-28 md:h-28 left-5 md:left-16 top-32 shadow-md rounded-full shadow-slate-400 absolute" alt="" />
                   <div className='block md:flex justify-between pt-6 '>
                     <div className='ml-28 -mt-3 md:mt-0 md:ml-48'>
                       <h6 className='mb-1'><strong> { result.n.name } </strong></h6>
-                      <p>n Friends</p>
+                      <p>{result.n.address}</p>
                     </div>
                     <div className='mb-4 md:mb-0 flex'>
                     
@@ -58,7 +58,7 @@ export default function PersonalPage(props) {
             <li><a href="/ListFriend">List Friends</a></li>
           </ul>
         </div> */}
-
+          <PersonalPost id={result.id}/>
             </div>
             ))} 
          

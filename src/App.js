@@ -29,7 +29,7 @@ import RecommendForPet from './Components/Friend/RecommendForPet';
 import Advertisement from './Components/Advertisement';
 import PersonalPost from './Components/Post/PersonalPost';
 import Pet from './Components/Profile/Pet';
-
+import EditPet from './Components/Profile/Include Function/EditPet';
 
 export const IsLoggedInContext = React.createContext(false)
 function App() {
@@ -40,12 +40,10 @@ function App() {
   }, [])
 
   const handleLogout = () => {
-    console.log("LOGOUT");
     document.cookie = "id=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
     setIsLoggedIn(false)
   }
-    console.log("RENDER", isLoggedIn);
-    
+   
 /////////////////////////
   
   const socket = io('http://localhost:4000');
@@ -72,6 +70,7 @@ function App() {
       <Route path='/ListFriend' element={<ListFriend  isLoggedIn= {isLoggedIn}/>}></Route>
       <Route path='/Custom' element={<Custom/>}></Route>
       <Route path='/Connect' element={<Connect/>}></Route>
+      <Route path='/EditPet/:id' element={<EditPet/>}></Route>
       {/* <Route path='/Post' element={<Post isLoggedIn= {isLoggedIn} />}></Route> */}
       {/* <Route path='/ListComment' element={<ListComment/>}></Route> */}
       <Route path='/Like' element={<Like/>}></Route>

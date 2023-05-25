@@ -1,17 +1,15 @@
 import React, { useEffect, useState } from 'react'
-import AddComment from './Include Function/AddComment'
-import ListComment from './ListComment'
 import apiGeneral from '../../api/apiGeneral';
-import Like from './Include Function/Like';
-import HandleLike from './Include Function/HandleLike';
-import { useParams } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
-export default function PersonalPost() {
+
+
+export default function PersonalPost(props) {
   const [nodes, setNodes] = useState([]);
- 
-  let { id } = useParams();
+
+  const { id } = props;
+
   useEffect(() => {
- 
 
     apiGeneral({ url: `/api/personalpost/${id}` })
       .then(data => {
@@ -20,13 +18,33 @@ export default function PersonalPost() {
       .catch(error => {
         console.log(error);
       })
-    
   }, [])
+  ///////
+  const handleDelete = async (event) => {
+    const idp = event.target.id;
+    console.log(id, "idddđ", idp, "a");
+    apiGeneral({ url: `/api/personalpost`, params: { idp }, method: "delete" })
+      .then(() => {
+        Swal.fire({
+          icon: 'success',
+          title: 'Delete success',
+          showConfirmButton: false,
+          timer: 3000
+        })
+        setTimeout(function () {
+          window.location.href = `/`;
+        }, 5000);
+
+      })
+      .catch(error => console.error(error));
+
+  }
+  //////
 
   return (
     <div className='container text-slate-900'>
       {
-        nodes.sort((a, b) => b.idp - a.idp).map((node) => (
+        nodes.map((node) => (
           <div className='py-10' key={node.idp}>
             <div className='shadow-sm py-10 pl-2 rounded-2xl  shadow-slate-900 bg-white'>
               <div className='flex pl-3'>
@@ -43,8 +61,13 @@ export default function PersonalPost() {
                       <p className='mb-0 capitalize' >{node.post.post_setting}</p>
                     </div>
                   </div>
+
                   <div className='pr-3'>
-                    <i className="fa-solid fa-trash"></i>
+                    <p>{node.idp}</p>
+
+                    <button type="submit" onClick={handleDelete} id={node.idp}
+                      className='px-4 py-1  ml-3 rounded-l-sm text-orange-400 m-0 bg-white border-2 border-solid  border-orange-400'><i id={node.idp} className="fa-solid fa-trash"></i>
+                    </button>
                   </div>
                 </div>
 
@@ -57,16 +80,7 @@ export default function PersonalPost() {
                 <img src={"/images/" + node.post.img} className="mx-auto w-48 md:w-96 " alt="" />
               </div>
 
-              <div className='w-4/5 m-auto flex'>
-                <HandleLike postId={node.idp}/>
-                <Like postId={node.idp} />
-
-              </div>
-              <div className='w-4/5 m-auto border-solid border-t-2 border-slate-900'></div>
-              {/* //Add Comment */}
-
-              
-              <ListComment postId={node.idp}  />
+             
             </div>
           </div>
 

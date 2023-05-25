@@ -31,7 +31,7 @@ export default function Post(props) {
   return (
     <div className='container text-slate-900'>
       {
-        nodes.sort((a, b) => b.idp - a.idp).map((node) => (
+        nodes.sort((a, b) => a.idp - b.idp).map((node) => (
           <div className='py-10' key={node.idp}>
             <div className='shadow-sm py-10 pl-2 rounded-2xl  shadow-slate-900 bg-white'>
               <div className='flex pl-3'>
