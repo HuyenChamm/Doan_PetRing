@@ -1,13 +1,15 @@
-exports.recommend = async (req, res) => {
+exports.getAccept = async (req, res) => {
   const {id} = req.query;
+
   req.session
   .run(`
-    MATCH (u1:User), (u2:User)
-    WHERE NOT (u1:User)-[:ADDFR]->(u2:User)-[:ACCEPT]->(u1:User)  
-    AND NOT (u2:User)-[:ADDFR]->(u1:User)-[:ACCEPT]->(u2:User)
-    AND NOT (u1:User)-[:ADDFR]->(u2:User)
-    AND id(u1) = ${id} AND NOT id(u2) = ${id} 
-    RETURN u2, id(u2)
+  MATCH (u1:User), (u2:User),(u2:User)-[:ADDFR]->(u1:User)
+  WHERE NOT (u1:User)-[:ADDFR]->(u2:User)-[:ACCEPT]->(u1:User)  
+  AND NOT (u2:User)-[:ADDFR]->(u1:User)-[:ACCEPT]->(u2:User)
+  AND NOT (u1:User)-[:ACCEPT]->(u2:User)
+  AND id(u1) = ${id} AND NOT id(u2) = ${id}
+  RETURN u2, id(u2) ,u1
+  
         `)
   .then(data => {
     const nodes = data.records.map(record =>{
@@ -25,14 +27,14 @@ exports.recommend = async (req, res) => {
 
 }
 
+exports.addAccept = async (req, res) => {
+  const {idadd,idu} = req.query;
 
-exports.addFriend = async (req, res) => {
-  const {idadd,id} = req.query;
   req.session
   .run(`
   MATCH (u1:User),(u2:User)
-  WHERE id(u1) =${idadd}  AND id(u2) = ${id}
-  CREATE (u1)-[:ADDFR]->(u2)
+  WHERE id(u1) =${idu}  AND id(u2) = ${idadd}
+  CREATE (u1)-[:ACCEPT]->(u2)
   RETURN u1,u2
         `)
   .then(data => {
@@ -42,14 +44,6 @@ exports.addFriend = async (req, res) => {
         u1: record.get('u1').properties
     };
     } 
-    );
-    console.log(
-      `
-      MATCH (u1:User),(u2:User)
-      WHERE id(u1) =${idadd}  AND id(u2) = ${id}
-      CREATE (u1)-[:ADDFR]->(u2)
-      RETURN u1,u2
-            `
     );
     res.json({
       data: nodes

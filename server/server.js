@@ -30,7 +30,7 @@ const recommendfrRoutes = require('./router/recommendfrRoutes');
 const personalpageRoutes = require('./router/personalpageRoutes');
 const chatRoutes = require('./router/chatRoutes');
 const personalpostRoutes = require('./router/personalpostRoutes');
-
+const acceptRoutes = require('./router/acceptRoutes');
 app.use((req, res, next) => {
   req.session = session;
   req.io = io ;
@@ -54,7 +54,8 @@ app.use('/api/recommendpet', recommendpetRoutes);
 app.use('/api/recommendfr',recommendfrRoutes);
 app.use('/api/personalpage',personalpageRoutes);
 app.use('/api/chat',chatRoutes);
-app.use('/api/personalpost',personalpostRoutes)
+app.use('/api/personalpost',personalpostRoutes);
+app.use('/api/accept',acceptRoutes)
 /////////////
 server.listen(port, () => {
   console.log(`SERVER ${port} is run`);

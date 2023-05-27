@@ -30,6 +30,7 @@ import Advertisement from './Components/Advertisement';
 import PersonalPost from './Components/Post/PersonalPost';
 import Pet from './Components/Profile/Pet';
 import EditPet from './Components/Profile/Include Function/EditPet';
+import ListAccept from './Components/Friend/ListAccept';
 
 export const IsLoggedInContext = React.createContext(false)
 function App() {
@@ -74,6 +75,7 @@ function App() {
       {/* <Route path='/Post' element={<Post isLoggedIn= {isLoggedIn} />}></Route> */}
       {/* <Route path='/ListComment' element={<ListComment/>}></Route> */}
       <Route path='/Like' element={<Like/>}></Route>
+      <Route path='/ListAccept' element={<ListAccept/>}></Route>
       <Route path='/PersonalPage/:id' element={<PersonalPage isLoggedIn= {isLoggedIn} />}></Route>
       <Route path='/Pet/:id' element={<Pet isLoggedIn= {isLoggedIn} />}></Route>
       <Route path='/Recommend' element={<Recommend isLoggedIn= {isLoggedIn}/>}></Route>

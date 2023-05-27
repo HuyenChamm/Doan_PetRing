@@ -8,15 +8,15 @@ export default function RecommendForPet() {
 
 
   useEffect(() => {
-    const str = document.cookie;
-    const id = str.substring(3);
-    apiGeneral({ url:`/api/recommendpet` , params: {id}})
-    .then(data => {
-      setNodes (data.data);
-    })
-    .catch(error =>{
-      console.log(error);
-    })
+    // const str = document.cookie;
+    // const id = str.substring(3);
+    // apiGeneral({ url:`/api/recommendpet` , params: {id}})
+    // .then(data => {
+    //   setNodes (data.data);
+    // })
+    // .catch(error =>{
+    //   console.log(error);
+    // })
   },[])
   return (
     <div className='recommend text-slate-900'>

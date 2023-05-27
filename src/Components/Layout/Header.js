@@ -18,7 +18,7 @@ export default function Header(props) {
   useEffect(() => {
     const str = document.cookie;
     const params = str.substring(3);
-    
+
 
     apiGeneral({ url: `/api/user/${params}` })
       .then(data => {
@@ -28,6 +28,12 @@ export default function Header(props) {
         console.log(error);
       })
   }, [])
+
+  ///
+  const [isOpenUl, setIsOpenUl] = useState(false);
+
+  const toggleDropdown = () => setIsOpenUl(!isOpenUl);
+
   return (
     <div className='header'>
       <nav className='bg-slate-900'>
@@ -44,7 +50,28 @@ export default function Header(props) {
                   <NavLink className={({ isActive }) => (isActive ? "link-active" : "link")} to="/">HOME</NavLink>
                 </li>
                 <li className='mb-0 lg:mx-5 font-bold flex hover:text-white'>
-                  <NavLink className={({ isActive }) => (isActive ? "link-active" : "link")} to="/ListFriend">LIST FRIEND</NavLink>
+                  <button className={({ isActive }) => (isActive ? "link-active" : "link")} onClick={toggleDropdown}>
+                    FRIEND
+                  </button>
+                  {isOpenUl && (
+                    <ul className="absolute bg-slate-900 text-white p-4 top-12 text-xs -ml-7">
+                      <li>
+                        <NavLink className={({ isActive }) => (isActive ? "link-active" : "link")} to="/ListFriend">
+                          LIST FRIEND
+                        </NavLink>
+                      </li>
+                      <li>
+                        <NavLink className={({ isActive }) => (isActive ? "link-active" : "link")} to="/Recommend">
+                          RECOMMEND FRIEND
+                        </NavLink>
+                      </li>
+                      <li>
+                        <NavLink className={({ isActive }) => (isActive ? "link-active" : "link")} to="/ListAccept">
+                          FRIEND REQUEST
+                        </NavLink>
+                      </li>
+                    </ul>
+                  )}
                 </li>
                 <li className='mb-0 lg:mx-5 font-bold flex hover:text-white'>
                   <NavLink className={({ isActive }) => (isActive ? "link-active" : "link")} to="/ProfileUser">PROFILE</NavLink>
@@ -60,9 +87,32 @@ export default function Header(props) {
                 <li className='mb-0 mx-2 font-bold flex hover:text-white'>
                   <NavLink className={({ isActive }) => (isActive ? "link-active" : "link")} to="/"> <i className="fa-solid fa-house mr-3 text-xs "></i></NavLink>
                 </li>
+
                 <li className='mb-0 mx-2 font-bold flex hover:text-white'>
-                  <NavLink className={({ isActive }) => (isActive ? "link-active" : "link")} to="/ListFriend"><i className="fa-solid fa-users mr-3 text-xs  "></i></NavLink>
+                  <button className={({ isActive }) => (isActive ? "link-active" : "link")} onClick={toggleDropdown}>
+                    <i className="fa-solid fa-users mr-3 text-xs  "></i>
+                  </button>
+                  {isOpenUl && (
+                    <ul className="absolute bg-slate-900 text-white p-4 top-8 text-xs -ml-7">
+                      <li>
+                        <NavLink className={({ isActive }) => (isActive ? "link-active" : "link")} to="/ListFriend">
+                          LIST FRIEND
+                        </NavLink>
+                      </li>
+                      <li>
+                        <NavLink className={({ isActive }) => (isActive ? "link-active" : "link")} to="/Recommend">
+                          RECOMMEND FRIEND
+                        </NavLink>
+                      </li>
+                      <li>
+                        <NavLink className={({ isActive }) => (isActive ? "link-active" : "link")} to="/ListAccept">
+                          FRIEND REQUEST
+                        </NavLink>
+                      </li>
+                    </ul>
+                  )}
                 </li>
+
                 <li className='mb-0 mx-2 font-bold flex hover:text-white'>
                   <NavLink className={({ isActive }) => (isActive ? "link-active" : "link")} to="/ProfileUser"><i className="fa-solid fa-user mr-3 text-xs "></i></NavLink>
                 </li>
@@ -85,7 +135,7 @@ export default function Header(props) {
                 </div>
                 <input type="text" className=" max-w-sm px-2 py-1 h-8 border border-solid  border-orange-400   text-sm leading-snug text-orange-400   shadow-none outline-none focus:outline-none font-normal rounded-r-full rounded-l-2xl flex-1  placeholder-orange-400 " placeholder="Search pink" />
               </div> */}
-              <Search socket = {socket}/>
+              <Search socket={socket} />
               {/* Check state login */}
               <CheckLogin isLoggedIn={isLoggedIn} handleLogout={handleLogout} />
 
@@ -103,18 +153,18 @@ export default function Header(props) {
                     </div>
                     <input type="text" className=" max-w-sm px-2 py-1 h-8 border border-solid  border-orange-400   text-sm leading-snug text-orange-400   shadow-none outline-none focus:outline-none font-normal rounded-r-full rounded-l-2xl flex-1  placeholder-orange-400 " placeholder="Search pink" />
                   </div> */}
-                  <Search socket = {socket}/>
+                  <Search socket={socket} />
                   {
-                     nodes.map((node) => (
-                  <div className='pb-10 pt-4' key={node.id}>
-                    <h4>{node.n.name}</h4>
-                    <img src={"/images/" + node.n.avt} className="w-24 h-24 rounded-full border-solid border-2 border-orange-400 " alt="" />
-                  </div>
+                    nodes.map((node) => (
+                      <div className='pb-10 pt-4' key={node.id}>
+                        <h4>{node.n.name}</h4>
+                        <img src={"/images/" + node.n.avt} className="w-24 h-24 rounded-full border-solid border-2 border-orange-400 " alt="" />
+                      </div>
 
-                  ))}
+                    ))}
                   <button type='button' onClick={handleLogout}
-              className='px-4 py-1 rounded-l-sm text-orange-400 m-0 bg-white border-2 border-solid  border-orange-400 '>Logout
-              <i className="fa-solid fa-arrow-right-from-bracket pl-2"></i></button>
+                    className='px-4 py-1 rounded-l-sm text-orange-400 m-0 bg-white border-2 border-solid  border-orange-400 '>Logout
+                    <i className="fa-solid fa-arrow-right-from-bracket pl-2"></i></button>
                 </div>
                 :
                 <div>{/* Hiện khi chưa đăng nhập */}
@@ -124,7 +174,7 @@ export default function Header(props) {
                   <div className='flex items-center my-5 lg:justify-center lg:m-5 lg:my-0 '>
                     <a href='/Login' className="px-4 py-1 rounded-l-sm text-orange-400 m-0 bg-white border-2 border-solid  border-orange-400   ">Login</a>
                     <a href="/Register" className="px-4 py-1 rounded-r-sm bg-orange-400  text-white border-2 border-solid  border-orange-400   ">Signup</a>
-                  </div> 
+                  </div>
                 </div>
             }
 

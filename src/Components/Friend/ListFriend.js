@@ -36,7 +36,7 @@ export default function ListFriend(props) {
               <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
                 {
                   nodes.map((node) => (
-                    <div className='item'>
+                    <div className='item' key={node.id}>
                       <img src={"/images/" + node.avt} className="mx-auto w-32 h-32 md:w-48 md:h-48 rounded-md " alt="" />
                       <div className='text-center pt-3'><p className='font-semibold'>{node.name}</p></div>
                     </div>

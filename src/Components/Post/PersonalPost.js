@@ -37,7 +37,6 @@ export default function PersonalPost(props) {
 
       })
       .catch(error => console.error(error));
-
   }
   //////
 

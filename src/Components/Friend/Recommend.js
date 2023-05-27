@@ -22,6 +22,22 @@ export default function Recommend(props) {
     })
    console.log(id,"rec");
   },[])
+
+  ///function Addfr
+  const handleAddfr = (e) => {
+    const str = document.cookie;
+    const idadd = str.substring(3);
+    const id = e.target.id;
+    apiGeneral({ url:`/api/recommend` , params: {id , idadd} ,method:"post"})
+    .then(data => {
+      alert("OK")
+      setNodes (data.data);
+      console.log(data);
+    })
+    .catch(error =>{
+      console.log(error);
+    })
+  }
   return (
     <div className='recommend text-slate-900'>
     {
@@ -45,9 +61,11 @@ export default function Recommend(props) {
                 </div>
               </div>
               <div className='mt-2 pb-2 text-center'>
-                <button className='px-6 py-2 text-sm font-bold border-2 border-solid border-slate-900'>
-                  + <span className='hidden  md:inline-block'> ADD FRIEND</span>
+                <button onClick={handleAddfr}
+                className='px-6 py-2 text-sm font-bold border-2 border-solid border-slate-900' id={node.id}>
+                  + <span className='hidden  md:inline-block' id={node.id}> ADD FRIEND</span>
                 </button>
+                <p>{node.id}</p>
               </div>
             </div>
             <div className='border-b-2 border-solid border-slate-400 w-full md:w-3/5 mx-auto'></div>
