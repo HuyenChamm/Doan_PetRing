@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import apiGeneral from '../../api/apiGeneral';
+import Swal from 'sweetalert2';
 
 export default function ListAccept() {
 
@@ -31,6 +32,15 @@ export default function ListAccept() {
       .then(data => {
         setNodes(data.data);
         console.log(data);
+        Swal.fire({
+          icon: 'success',
+          title: 'Accept friend request success',
+          showConfirmButton: false,
+          timer: 3000
+        })
+        setTimeout(function () {
+          window.location.href = "/ListFriend";
+        }, 5000);
       })
       .catch(error => {
         console.log(error);

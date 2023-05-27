@@ -39,9 +39,9 @@ export default function EditPet() {
   /////////
 
   const handleEditInfor = async (e) => {
-    
+
     const imgp = img.name;
-    apiGeneral({ url: `/api/pet/editpet`, params: { id,name,age,type,desc,weight ,imgp}, method: "put" })
+    apiGeneral({ url: `/api/pet/editpet`, params: { id, name, age, type, desc, weight, imgp }, method: "put" })
       .then(() => {
         Swal.fire({
           icon: 'success',
@@ -59,8 +59,9 @@ export default function EditPet() {
   }
   //////
 
+
   useEffect(() => {
-  
+
     apiGeneral({ url: `/api/pet/editpet/${id}` })
       .then(data => {
         setNodes(data.data);
@@ -75,17 +76,21 @@ export default function EditPet() {
       .catch(error => {
         console.log(error);
       })
-      console.log(id);
+    console.log(id);
   }, [])
 
   return (
     <div>
+    <div className='container'>
+                <button onClick={goBack} className='text-slate-900'><i class="fa-solid fa-backward"></i></button>
+                </div>
+          <div>
       <div className='container'>
         <div className="bg-white rounded-lg p-8 w-full max-w-md text-slate-900 mx-auto">
-          <div>
+        
 
             <h5>Edit Information Pet</h5>
-           
+
             <div className="relative z-0 w-full mb-6 group">
               <input type="text" value={name} onChange={(event) => setName(event.target.value)}
                 className="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 border-slate-800 appearance-none  focus:outline-none focus:ring-0 focus:border-slate-700 peer" placeholder=" " required />
@@ -145,14 +150,20 @@ export default function EditPet() {
                   )}
                 </div>
 
+               
+              </div>
+
+            </div>
+            <div className='flex'>
                 <div className='mt-3 text-end flex '>
                   <button type="submit" onClick={handleEditInfor}
                     className="text-white bg-slate-900 font-medium rounded-full text-sm   px-5 py-1 text-center">Save</button>
 
+                  
+
                 </div>
-              </div>
-             
-            </div>
+               
+                </div>
           </div>
         </div>
       </div>

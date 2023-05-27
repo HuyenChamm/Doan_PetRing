@@ -62,7 +62,7 @@ export default function PersonalPost(props) {
                   </div>
 
                   <div className='pr-3'>
-                    <p>{node.idp}</p>
+                   
 
                     <button type="submit" onClick={handleDelete} id={node.idp}
                       className='px-4 py-1  ml-3 rounded-l-sm text-orange-400 m-0 bg-white border-2 border-solid  border-orange-400'><i id={node.idp} className="fa-solid fa-trash"></i>

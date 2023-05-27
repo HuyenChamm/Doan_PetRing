@@ -2,11 +2,14 @@ import React, { useEffect, useState } from 'react';
 import apiGeneral from '../../api/apiGeneral';
 import AlertLogin from '../AlertLogin';
 import Swal from 'sweetalert2';
+import { Link } from 'react-router-dom';
 
 
 export default function ProfileUser(props) {
   const { isLoggedIn } = props
   const [nodes, setNodes] = useState([]);
+  const str = document.cookie;
+    const id = str.substring(3);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const openModal = () => {
@@ -117,6 +120,9 @@ export default function ProfileUser(props) {
                 
                 <a href='/ProfilePet'
                   className="text-white shadow-sm shadow-slate-400 bg-slate-700 hover:bg-slate-800 font-medium rounded-md text-sm ml-4  px-5 py-1 text-center mr-3">Profile Pet</a>
+
+                  <Link to={`/PersonalPage/${id}`}
+                  className="text-white shadow-sm shadow-slate-400 bg-slate-700 hover:bg-slate-800 font-medium rounded-md text-sm ml-4  px-5 py-1 text-center mr-3">Edit Post</Link>
               </div>
             </div>
             {

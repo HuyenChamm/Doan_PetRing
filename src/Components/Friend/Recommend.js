@@ -65,7 +65,7 @@ export default function Recommend(props) {
                 className='px-6 py-2 text-sm font-bold border-2 border-solid border-slate-900' id={node.id}>
                   + <span className='hidden  md:inline-block' id={node.id}> ADD FRIEND</span>
                 </button>
-                <p>{node.id}</p>
+                
               </div>
             </div>
             <div className='border-b-2 border-solid border-slate-400 w-full md:w-3/5 mx-auto'></div>
