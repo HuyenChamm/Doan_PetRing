@@ -21,15 +21,21 @@ exports.getAllFriend = (req, res) => {
   .run(`
   MATCH (u1:User)-[:ADDFR]->(u2:User)-[:ACCEPT]->(u1:User) 
   WHERE  id(u1) = ${id}
-  RETURN u1, u2
+  RETURN u1, u2 ,id(u2)
   UNION
   MATCH (u2:User)-[:ADDFR]->(u1:User)-[:ACCEPT]->(u2:User)
   WHERE  id(u1) = ${id}
-  RETURN u1, u2
-
+  RETURN u1, u2 ,id(u2)
   `)
   .then(data => {
-    const nodes = data.records.map(record => record.get('u2').properties);
+    const nodes = data.records.map(record => 
+      {
+        return { 
+          u: record.get('u2').properties, 
+          id: record.get(`id(u2)`).lows, 
+      };
+      }
+      );
     
     res.json({
       data: nodes

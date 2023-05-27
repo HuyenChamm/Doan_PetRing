@@ -4,17 +4,34 @@ import AlertLogin from '../AlertLogin';
 
 export default function Chat(props) {
   const { isLoggedIn } = props;
+
+  const [friends, setFriends] = useState([]);
   const [sends, setSend] = useState([]);
 
+///////////
   useEffect(() => {
-    apiGeneral({ url: '/api/chat' })
+    apiGeneral({ url: '/api/chat/send' })
       .then(data => {
         setSend(data.data);
       })
       .catch(error => {
         console.log(error);
       })
+
+    ///////
+    const str = document.cookie;
+    const params = str.substring(3);
+    console.log("params", params);
+
+    apiGeneral({ url: `/api/friend/${params}` })
+      .then(data => {
+        setFriends(data.data);
+      })
+      .catch(error => {
+        console.log(error);
+      })
   }, [])
+
 
 
   return (
@@ -88,7 +105,7 @@ export default function Chat(props) {
                 </div>
 
               </div>
-
+{/* Friend */}
               <div className='right w-20p border border-solid  border-slate-400 p-3 rounded-md '>
                 <div>
                   <div className="flex">
@@ -101,14 +118,16 @@ export default function Chat(props) {
                 <div className='mt-3'>
                   <p><strong>List Friend</strong></p>
                 </div>
-                <div>
+                {friends.map((friend) => (
+                <div className='shadow-slate-900 shadow-sm p-2 ' key={friend.id}>
                   <div className='flex'>
-                    <img src="/images/avt_1.jpg" className="mx-auto ml-0 w-12 h-12  rounded-md" alt="" />
-                    <button className='font-semibold'>Chat<i className="fa-solid fa-plus pl-2"></i></button>
+                    <img src={"/images/" + friend.u.avt} className="mx-auto ml-0 w-10 h-10  rounded-md" alt="" />
+                    <button className='font-semibold text-sm' id={friend.id}>Chat<i className="fa-solid fa-plus pl-2"></i></button>
                   </div>
-                  <p className='text-sm mt-3'><strong>User Name</strong></p>
-
+                  <p className='text-sm mt-3 mb-0'><strong>{friend.u.name}</strong></p>
                 </div>
+                ))}
+
               </div>
 
             </div>

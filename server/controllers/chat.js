@@ -71,7 +71,7 @@ exports.getMessSend = (req, res) => {
   req.session
   .run(`
   MATCH (u:User)-[:MESSAGE]-> (m:MESSAGE) -[:SEND]-> (u2:User)
-  WHERE id(u) = 0 AND id(u2) = 2  RETURN m,u,u2
+  WHERE id(u) = 1 AND id(u2) = 0  RETURN m,u,u2
   `)
   .then(data => {
     const nodes = data.records.map(record =>{
@@ -92,7 +92,7 @@ exports.getMessReceive = (req, res) => {
   req.session
   .run(`
   MATCH (u:User)-[:MESSAGE]-> (m:MESSAGE) -[:SEND]-> (u2:User)
-  WHERE id(u) = 2 AND id(u2) = 0  RETURN m,u,u2
+  WHERE id(u) = 1 AND id(u2) = 0  RETURN m,u,u2
   `)
   .then(data => {
     const nodes = data.records.map(record =>{

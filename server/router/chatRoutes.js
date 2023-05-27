@@ -7,8 +7,14 @@ router.route('/:id')
 .post(chatController.sendMess)
 
 router.route('/')
+
+
+
+router.route('/send')
 .get(chatController.getMessSend)
-// .get(chatController.getMessReceive)
+
+router.route('/receive')
+.get(chatController.getMessReceive)
 
 
 module.exports = router;

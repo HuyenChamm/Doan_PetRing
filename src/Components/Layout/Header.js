@@ -41,15 +41,15 @@ export default function Header(props) {
           <div className=' flex items-center justify-between'>
 
             <div className="flex items-center">
-              <a href="/"><img src="/images/petring.png" className=" w-16 h-10 md:w-28 md:h-14 " alt="" /></a>
+              <a href="/Advertisement"><img src="/images/petring.png" className=" w-16 h-10 md:w-28 md:h-14 " alt="" /></a>
             </div>
 
             <div className='hidden lg:block' >
-              <ul className="flex items-center justify-center mb-0 mt-0 ml-0 ">
-                <li className='mb-0 lg:mx-5 font-bold flex hover:text-white'>
+              <ul className="flex items-center justify-center mb-0 mt-0 ml-0 text-sm">
+                <li className='mb-0 lg:mx-4 font-bold flex hover:text-white'>
                   <NavLink className={({ isActive }) => (isActive ? "link-active" : "link")} to="/">HOME</NavLink>
                 </li>
-                <li className='mb-0 lg:mx-5 font-bold flex hover:text-white'>
+                <li className='mb-0 lg:mx-4 font-bold flex hover:text-white'>
                   <button className={({ isActive }) => (isActive ? "link-active" : "link")} onClick={toggleDropdown}>
                     FRIEND
                   </button>
@@ -73,11 +73,14 @@ export default function Header(props) {
                     </ul>
                   )}
                 </li>
-                <li className='mb-0 lg:mx-5 font-bold flex hover:text-white'>
+                <li className='mb-0 lg:mx-4 font-bold flex hover:text-white'>
                   <NavLink className={({ isActive }) => (isActive ? "link-active" : "link")} to="/ProfileUser">PROFILE</NavLink>
                 </li>
-                <li className='mb-0 lg:mx-5 font-bold flex hover:text-white'>
+                <li className='mb-0 lg:mx-4 font-bold flex hover:text-white'>
                   <NavLink className={({ isActive }) => (isActive ? "link-active" : "link")} to="/Chat">MESSAGE</NavLink>
+                </li>
+                <li className='mb-0 lg:mx-4 font-bold flex hover:text-white'>
+                  <NavLink className={({ isActive }) => (isActive ? "link-active" : "link")} to="/Zoo">ZOO</NavLink>
                 </li>
               </ul>
             </div>
@@ -118,6 +121,9 @@ export default function Header(props) {
                 </li>
                 <li className='mb-0 mx-2 font-bold flex hover:text-white'>
                   <NavLink className={({ isActive }) => (isActive ? "link-active" : "link")} to="/Chat"><i className="fa-solid fa-message  mr-3 text-xs"></i></NavLink>
+                </li>
+                <li className='mb-0 mx-2 font-bold flex hover:text-white'>
+                  <NavLink className={({ isActive }) => (isActive ? "link-active" : "link")} to="/Zoo "><i className="fa-solid fa-paw"></i></NavLink>
                 </li>
               </ul>
             </div>

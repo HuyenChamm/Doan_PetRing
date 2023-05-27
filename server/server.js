@@ -31,6 +31,8 @@ const personalpageRoutes = require('./router/personalpageRoutes');
 const chatRoutes = require('./router/chatRoutes');
 const personalpostRoutes = require('./router/personalpostRoutes');
 const acceptRoutes = require('./router/acceptRoutes');
+const zooRoutes = require('./router/zooRoutes');
+
 app.use((req, res, next) => {
   req.session = session;
   req.io = io ;
@@ -56,6 +58,7 @@ app.use('/api/personalpage',personalpageRoutes);
 app.use('/api/chat',chatRoutes);
 app.use('/api/personalpost',personalpostRoutes);
 app.use('/api/accept',acceptRoutes)
+app.use('/api/zoo',zooRoutes)
 /////////////
 server.listen(port, () => {
   console.log(`SERVER ${port} is run`);
