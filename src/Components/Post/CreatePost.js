@@ -8,6 +8,7 @@ export default function CreatePost(props) {
   const [option, setOption] = useState('');
 
   const { isLoggedIn } = props;
+  
   const timeRef = useRef(null);
   // const [time, setTime] = useState('');
 

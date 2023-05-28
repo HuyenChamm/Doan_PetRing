@@ -3,11 +3,10 @@ const router = express.Router();
 const chatController = require('../controllers/chat')
 
 
-router.route('/:id')
-.post(chatController.sendMess)
+
 
 router.route('/')
-
+.post(chatController.sendMess)
 
 
 router.route('/send')

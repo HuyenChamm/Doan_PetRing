@@ -32,7 +32,7 @@ exports.getAllFriend = (req, res) => {
       {
         return { 
           u: record.get('u2').properties, 
-          id: record.get(`id(u2)`).lows, 
+          id: record.get(`id(u2)`).low, 
       };
       }
       );

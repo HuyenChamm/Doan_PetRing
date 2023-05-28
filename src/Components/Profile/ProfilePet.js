@@ -76,7 +76,7 @@ export default function ProfilePet(props) {
                         <div className=''>
                           <button type="submit" className='px-4 py-1 rounded-l-sm text-orange-400 m-0 bg-white border-2 border-solid  border-orange-400'>Follow <i className="fa-solid fa-plus"></i>
                           </button>
-                          <Link  to={`/EditPet/${node.idpet}`}
+                          <Link  to={`/EditPet/${node.idpet}`} 
                             className='px-4 py-1  ml-3 rounded-l-sm text-orange-400 m-0 bg-white border-2 border-solid  border-orange-400'>Edit Information
                           </Link> 
                            <button type="submit" onClick={handleDelete} id={node.idpet}

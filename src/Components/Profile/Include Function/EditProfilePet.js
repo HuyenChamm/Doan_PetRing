@@ -129,7 +129,7 @@ export default function EditProfilePet() {
                 </div>
               </div>
               </div>
-              <div className='text-center flex'>
+              <div className='text-center md:flex'>
                 <button type="submit" className="text-white bg-slate-900 border-solid  border-2 hover:bg-slate-800 font-medium rounded-full text-sm  w-auto px-16 md:px-20 py-2 my-5 text-center mr-3">Add</button> 
                 <div>
                   <button onClick={goBack} className='text-white bg-slate-900 border-solid  border-2 hover:bg-slate-800 font-medium rounded-full text-sm  w-auto px-16 md:px-20 py-2 my-5 text-center'>Back</button>

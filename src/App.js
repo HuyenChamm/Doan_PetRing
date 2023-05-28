@@ -33,6 +33,7 @@ import EditPet from './Components/Profile/Include Function/EditPet';
 import ListAccept from './Components/Friend/ListAccept';
 import Zoo from './Components/Profile/Zoo';
 
+
 export const IsLoggedInContext = React.createContext(false)
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -73,6 +74,7 @@ function App() {
       <Route path='/Custom' element={<Custom/>}></Route>
       <Route path='/Connect' element={<Connect/>}></Route>
       <Route path='/Zoo' element={<Zoo/>}></Route>
+
       <Route path='/EditPet/:id' element={<EditPet/>}></Route>
       {/* <Route path='/Post' element={<Post isLoggedIn= {isLoggedIn} />}></Route> */}
       {/* <Route path='/ListComment' element={<ListComment/>}></Route> */}
