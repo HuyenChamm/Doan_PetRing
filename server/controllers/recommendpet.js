@@ -1,8 +1,10 @@
+const driver = require("../utils/db");
 
 exports.recommendpet = (req, res) => {
+  const session = driver.session();
   const {id} = req.query;
  
-  req.session
+  session
   .run(`MATCH (me:User), (user:User), (pet:Pet)
         WHERE NOT (me)-[:FRIEND]-(user) 
         AND id(me) = ${id} 

@@ -1,6 +1,10 @@
+const driver = require("../utils/db");
+
+
 exports.recommend = async (req, res) => {
+  const session = driver.session();
   const {id} = req.query;
-  req.session
+  session
   .run(`
     MATCH (u1:User), (u2:User)
     WHERE NOT (u1:User)-[:ADDFR]->(u2:User)-[:ACCEPT]->(u1:User)  
@@ -27,8 +31,9 @@ exports.recommend = async (req, res) => {
 
 
 exports.addFriend = async (req, res) => {
+  const session = driver.session();
   const {idadd,id} = req.query;
-  req.session
+  session
   .run(`
   MATCH (u1:User),(u2:User)
   WHERE id(u1) =${idadd}  AND id(u2) = ${id}

@@ -1,7 +1,11 @@
+const driver = require("../utils/db");
+
 exports.getAccept = async (req, res) => {
+
+  const session = driver.session();
   const {id} = req.query;
 
-  req.session
+  session
   .run(`
   MATCH (u1:User), (u2:User),(u2:User)-[:ADDFR]->(u1:User)
   WHERE NOT (u1:User)-[:ADDFR]->(u2:User)-[:ACCEPT]->(u1:User)  
@@ -28,9 +32,10 @@ exports.getAccept = async (req, res) => {
 }
 
 exports.addAccept = async (req, res) => {
+  const session = driver.session();
   const {idadd,idu} = req.query;
 
-  req.session
+  session
   .run(`
   MATCH (u1:User),(u2:User)
   WHERE id(u1) =${idu}  AND id(u2) = ${idadd}

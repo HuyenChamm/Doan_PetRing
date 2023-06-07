@@ -1,8 +1,11 @@
 /////////
 
+const driver = require("../utils/db");
+
 exports.getAllLike = (req, res) => {
+  const session = driver.session();
   const { postId } = req.query
-  req.session
+  session
     .run(`MATCH (u:User)-[l:LIKE]->(p:POST) WHERE id(p) =${postId} RETURN count(l) AS count ,id(p)`)
     .then(data => {
       const nodes = data.records.map(record => record.get('count').toNumber()
@@ -17,8 +20,9 @@ exports.getAllLike = (req, res) => {
 }
 
 exports.getStatusLike = (req, res) => {
+  const session = driver.session();
   const { postId,id } = req.query
-  req.session
+  session
     .run(`MATCH (u:User)-[l:LIKE]->(p:POST) WHERE id(p) =${postId} AND id(u)= ${id} RETURN u,id(p),p`)
     .then(data => {
       const nodes = data.records.map(record => {
@@ -43,9 +47,10 @@ exports.getStatusLike = (req, res) => {
 
 
 exports.addLike = (req, res) => {
+  const session = driver.session();
   const { postId , id} = req.query
   console.log( postId , id,"addlike");
-  req.session
+  session
     .run(`MATCH (u:User),(p:POST)
           WHERE id(u) = ${id}  AND id(p) = ${postId}
           CREATE (u)-[l:LIKE]->(p)
@@ -69,8 +74,9 @@ exports.addLike = (req, res) => {
 
 
 exports.deleteLike = (req, res) => {
+  const session = driver.session();
   const { postId , id} = req.query
-  req.session
+  session
     .run(`MATCH (u:User)-[r:LIKE]->(p:POST)
           WHERE id(u) =${id} AND id(p) = ${postId}
           DELETE r RETURN u,id(p),p`)

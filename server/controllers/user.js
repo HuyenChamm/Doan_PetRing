@@ -1,5 +1,8 @@
+const driver = require("../utils/db");
+
 exports.getAllUser = (req, res) => {
-  req.session
+  const session = driver.session();
+  session
   .run('MATCH (n:User)  RETURN n,id(n)')
   .then(data => {
     const nodes = data.records.map(record => {
@@ -19,9 +22,10 @@ exports.getAllUser = (req, res) => {
 
 
 exports.getUser = (req, res) => {
+  const session = driver.session();
   const {id} = req.params;
  
-  req.session
+  session
   .run(`MATCH (n:User) WHERE id(n) = ${id} RETURN n,id(n)`)
   .then(data => {
     const nodes = data.records.map(record =>{
@@ -46,9 +50,10 @@ exports.addUser = (req, res) => {
 }
 
 exports.updateUser = (req, res) => {
+  const session = driver.session();
   const {id, name, email, address, phone,sex,dob} = req.query;
   console.log(id, name, email, address, phone,sex,dob);
-  req.session
+  session
   .run(`MATCH (n:User) WHERE id(n) = ${id} SET n.name = "${name}" , n.email = "${email}" , n.phone = "${phone}" , 
         n.sex = "${sex}", n.dob = " ${dob}", n.address = "${address}" RETURN n , id(n)`)
   .then(data => {

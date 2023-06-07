@@ -5,6 +5,7 @@ import AlertLogin from '../AlertLogin';
 
 export default function Chat(props) {
   const { isLoggedIn, socket } = props;
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [friends, setFriends] = useState([]);
   const [nodeId, setNodeId] = useState(null);
@@ -12,13 +13,20 @@ export default function Chat(props) {
 
   const [sends, setSend] = useState([]);
   const [receives, setReceives] = useState([]);
+  //////
+  const handleClick = (e) => {
+    const id = e.target.id; 
+    setNodeId(id);
+    setIsModalOpen(true);
+  }
   ///////////
 
   useEffect(() => {
     const str = document.cookie;
-    const params = str.substring(3);  
-    console.log(params, nodeId);
-    apiGeneral({ url: '/api/chat/send', params: { nodeId, params } })
+    const id = str.substring(3);  
+    const idu = nodeId;
+    console.log(id, idu ,"chattttt");
+    apiGeneral({ url: '/api/chat/send', params: { idu, id } })
       .then(data => {
         setSend(data.data);
       })
@@ -30,7 +38,7 @@ export default function Chat(props) {
       //   setSend(oldData => [...oldData,data]);
       // })
     /////
-    apiGeneral({ url: '/api/chat/receive', params: { nodeId, params } })
+    apiGeneral({ url: '/api/chat/receive', params: { idu, id } })
       .then(data => {
         setReceives(data.data);
       })
@@ -41,7 +49,7 @@ export default function Chat(props) {
         
     /////
 
-    apiGeneral({ url: `/api/friend/${params}` })
+    apiGeneral({ url: `/api/friend/${id}` })
       .then(data => {
         setFriends(data.data);
       })
@@ -52,12 +60,7 @@ export default function Chat(props) {
 
   ////////
 
-  const handleClick = (e) => {
-    const id = e.target.id
-    console.log(id, "idchat");
-    setNodeId(id);
-    setIsModalOpen(true);
-  }
+
   const closeModal = () => {
     setIsModalOpen(false);
   };
@@ -68,13 +71,13 @@ export default function Chat(props) {
   const sendMess = (e) => {
     const str = document.cookie;
     const id = str.substring(3);
-    console.log(messageInput);
+    const idu = nodeId;
     const currentTime = new Date().toLocaleString();
     timeRef.current = currentTime;
     console.log('Thời gian:', timeRef.current);
     const time = timeRef.current;
 
-    apiGeneral({ url: `/api/chat`, params: { messageInput, id, nodeId, time }, method: "POST" })
+    apiGeneral({ url: `/api/chat`, params: { messageInput, id, idu , time }, method: "POST" })
       .then(data => {
         setFriends(data.data);
       })
@@ -206,19 +209,19 @@ export default function Chat(props) {
                           </div>
                         ))}
 
-                        <div className='user-left py-3 flex justify-end '>
+                        {/* <div className='user-left py-3 flex justify-end '>
                         <div className='bg-slate-200 w-60p lg:w-2/5 px-3 pt-1 pb-3 rounded-xl text-sm md:text-base'>
                           <small className='text-xs text-slate-800'>Lyly</small>
                           <p className='mb-0 '>Heloo Huyen Tram</p>
                         </div>
-                        </div>
+                        </div> */}
 
-                        <div className='user-right py-3 flex justify-start ' >
+                        {/* <div className='user-right py-3 flex justify-start ' >
                               <div className='bg-slate-200 w-60p lg:w-2/5 p-3 rounded-xl text-sm md:text-base'>
                                 <small className='text-xs text-slate-800'>Huyen Tram</small>
                                 <p className='mb-0'>Hi ! LyLy</p>
                               </div>
-                            </div>
+                            </div> */}
                         {
                           receives.map((receive) => (
                             <div className='user-right py-3 flex justify-start ' key={receive.idm}>

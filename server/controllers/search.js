@@ -1,11 +1,13 @@
+const driver = require("../utils/db");
 
 exports.getSearch = (req, res) => {
+const session = driver.session();
  const {query} = req.query
  console.log("name",query);
  console.log(query !== '');
  if(query !== '' )
  {
-  req.session
+  session
   .run(`MATCH (u:User) WHERE toLower(u.name ) CONTAINS toLower("${query}") RETURN u,id(u)`)
   .then(data => {
     const nodes = data.records.map(record => {

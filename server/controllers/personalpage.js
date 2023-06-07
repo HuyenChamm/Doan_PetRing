@@ -1,7 +1,9 @@
+const driver = require("../utils/db");
+
 exports.getUser = (req, res) => {
+  const session = driver.session();
   const {id} = req.params;
- 
-  req.session
+  session
   .run(`MATCH (n:User) WHERE id(n) = ${id} RETURN n,id(n)`)
   .then(data => {
     const nodes = data.records.map(record =>{

@@ -2,6 +2,8 @@
 //   const {id} = req.params;
 //   console.log(id)
 
+const driver = require("../utils/db");
+
 // req.session.readTransaction( async tx => {
 //   const result = await tx.run(`MATCH (u1:User)-[r]->(u2:User) WHERE type(r) = 'FRIEND' AND u1.id="${id}" RETURN  u2`);
 //   const nodes = result.records.map(record => record.get('u2').properties );
@@ -15,9 +17,10 @@
 // }
 
 exports.getAllFriend = (req, res) => {
+  const session = driver.session();
   const {id} = req.params;
   console.log(id);
-  req.session
+  session
   .run(`
   MATCH (u1:User)-[:ADDFR]->(u2:User)-[:ACCEPT]->(u1:User) 
   WHERE  id(u1) = ${id}

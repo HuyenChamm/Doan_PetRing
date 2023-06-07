@@ -2,7 +2,9 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 const port = 4000;
-const session = require('./utils/db');
+// const session = require('./utils/db');
+const driver = require('./utils/db');
+
 
 const server = require('http').createServer(app);
 const io = require('socket.io')(server,{
@@ -34,6 +36,7 @@ const acceptRoutes = require('./router/acceptRoutes');
 const zooRoutes = require('./router/zooRoutes');
 
 app.use((req, res, next) => {
+  const session = driver.session();
   req.session = session;
   req.io = io ;
   next();

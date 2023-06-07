@@ -1,56 +1,64 @@
-// exports.getAllPost = (req, res) => {
-//   const {post_setting} = req.query
-//   const requestPubblic = post_setting ? `AND p.post_setting ='public'` : ``
+const driver = require("../utils/db")
 
-//   req.session
-//   .run(`MATCH (p:POST)-[n:POST]->(u:User) WHERE p.user_id = u.id ${requestPubblic} RETURN u,p`)
-//   .then(data => {
-//     // console.log(`MATCH (p:POST)-[n:POST]->(u:User) WHERE p.user_id = u.id ${requestPubblic} RETURN u.name,p`);
-//     const nodes = data.records.map(record => {
-//       return {
-//       u: record.get('u').properties, 
-//       post: record.get('p')?.properties}
-//     });
-    
-//     res.json({
-//       data: nodes
-//     })
-//   })
-//   .catch(error => console.error(error))
-  
-// }
-
-exports.getAllPost = async (req, res) => {
+exports.getAllPost = (req, res) => {
+  const session = driver.session();
   const {post_setting} = req.query
-  const requestPubblic = post_setting ? `WHERE p.post_setting ='public'` : ``
+  const requestPubblic = post_setting ? `AND p.post_setting ='public'` : ``
 
-req.session.readTransaction( async tx => {
-  // WHERE p.user_id = u.id
-  const result =
-    await tx.run(`MATCH (p:POST)-[n:POST]->(u:User)  ${requestPubblic} RETURN u,p,id(u),id(p)`);
-  const nodes = result.records.map(record => {
-            return { 
-              u: record.get('u').properties, 
-              post: record.get('p')?.properties,
-              idu: record.get(`id(u)`).low,
-              idp: record.get(`id(p)`).low
-          };
-        });
-  res.json({
-    data: nodes
+  session
+  .run(`MATCH (p:POST)-[n:POST]->(u:User)  ${requestPubblic} RETURN u,p,id(u),id(p)`)
+  .then(data => {
+    // console.log(`MATCH (p:POST)-[n:POST]->(u:User) WHERE p.user_id = u.id ${requestPubblic} RETURN u.name,p`);
+    const nodes = data.records.map(record => {
+      return {
+        u: record.get('u').properties, 
+        post: record.get('p')?.properties,
+        idu: record.get(`id(u)`).low,
+        idp: record.get(`id(p)`).low
+      }
+    });
+    
+    res.json({
+      data: nodes
+    })
   })
-}).then(() => {
-}).catch(error => {
-  console.log(error);
-})
-
+  .catch(error => console.error(error))
+  
 }
+///
+// exports.getAllPost = async (req, res) => {
+ 
+//   const {post_setting} = req.query
+//   const requestPubblic = post_setting ? `WHERE p.post_setting ='public'` : ``
+
+// req.session.readTransaction( async tx => {
+//   // WHERE p.user_id = u.id
+//   const result =
+//     await tx.run(`MATCH (p:POST)-[n:POST]->(u:User)  ${requestPubblic} RETURN u,p,id(u),id(p)`);
+//   const nodes = result.records.map(record => {
+//             return { 
+//               u: record.get('u').properties, 
+//               post: record.get('p')?.properties,
+//               idu: record.get(`id(u)`).low,
+//               idp: record.get(`id(p)`).low
+//           };
+//         });
+//   res.json({
+//     data: nodes
+//   })
+// }).then(() => {
+// }).catch(error => {
+//   console.log(error);
+// })
+
+// }
 
 
 exports.addPost = (req, res) => {
+  const session = driver.session();
   const { id , imgp , content , time, option } = req.query
   console.log(id , imgp , content ,time,  option ,"addpost");
-  req.session
+  session
   .run(`
   MATCH (u:User) WHERE id(u) = ${id}
   CREATE (post:POST{content:'${content}',img:'${imgp}',datetime:'${time}',post_setting:'${option}'})

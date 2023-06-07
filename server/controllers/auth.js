@@ -1,7 +1,10 @@
+const driver = require("../utils/db");
+
 exports.auth = (req, res) => {
+  const session = driver.session();
   console.log(req.query);
   const {username, pass} = req.query
-  req.session
+  session
   .run(`MATCH (n:User {username: "${username}", pass: "${pass}" }) RETURN n,id(n)`)
   .then(data => {
     const nodes = data.records.map(record =>{

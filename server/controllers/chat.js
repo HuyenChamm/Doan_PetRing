@@ -18,6 +18,9 @@
 //       data: nodes
 //     })
 //   }).then(() => {
+
+const driver = require("../utils/db");
+
     
 
 //   }).catch(error => {
@@ -74,12 +77,12 @@
 // })}
 
 exports.getMessSend = (req, res) => {
-
-  const { params, nodeId } = req.query;
-  req.session
+  const session = driver.session();
+  const { id, idu } = req.query;
+  session
     .run(`
     MATCH (u:User)-[:MESSAGE]-> (m:MESSAGE) -[:SEND]-> (u2:User)
-    WHERE id(u) =${params} AND id(u2) = ${nodeId}  RETURN m,u,u2,id(m)
+    WHERE id(u) =${id} AND id(u2) = ${idu}  RETURN m,u,u2,id(m)
   `)
     .then(data => {
       const nodes = data.records.map(record => {
@@ -103,11 +106,12 @@ exports.getMessSend = (req, res) => {
 }
 
 exports.getMessReceive = (req, res) => {
-  const { params, nodeId } = req.query;
-  req.session
+  const session = driver.session();
+  const { id, idu } = req.query;
+  session
     .run(`
   MATCH (u:User)-[:MESSAGE]-> (m:MESSAGE) -[:SEND]-> (u2:User)
-  WHERE id(u) = ${nodeId} AND id(u2) = ${params}  RETURN m,u,u2,id(m)
+  WHERE id(u) = ${idu} AND id(u2) = ${id}  RETURN m,u,u2,id(m)
   `)
     .then(data => {
       const nodes = data.records.map(record => {
@@ -127,11 +131,12 @@ exports.getMessReceive = (req, res) => {
 }
 
 exports.sendMess = (req, res) => {
-  const { messageInput, id, nodeId, time } = req.query;
-  req.session
+  const session = driver.session();
+  const { messageInput, id, idu, time } = req.query;
+  session
     .run(`
   MATCH (u:User), (u2:User)
-  WHERE id(u) = ${id} AND id(u2) = ${nodeId}
+  WHERE id(u) = ${id} AND id(u2) = ${idu}
   CREATE (m:MESSAGE { message:'${messageInput}',send_at:'${time}' })
   CREATE (u)-[:MESSAGE]->(m)-[:SEND]->(u2)
   RETURN m,u,u2,id(m)
