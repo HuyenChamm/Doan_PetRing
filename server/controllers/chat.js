@@ -1,25 +1,30 @@
 // //Get message send
 // exports.getMessSend = async (req, res) => {
-//   req.session.readTransaction( async tx => {
-//   const result = await tx.run(`
+//   const { params, nodeId } = req.query;
+//   req.session.readTransaction(async tx => {
+//     const result = await tx.run(`
 //   MATCH (u:User)-[:MESSAGE]-> (m:MESSAGE) -[:SEND]-> (u2:User)
-//   WHERE id(u) = 0 AND id(u2) = 2  RETURN m,u,u2
+//     WHERE id(u) =${params} AND id(u2) = ${nodeId}  RETURN m,u,u2,id(m)
 //    `);
-//   const nodes = result.records.map(record => {
-//             return { 
-//               m: record.get('m').properties, 
-//               u: record.get('u').properties, 
-//               u2: record.get('u2').properties, 
-//           };
-//         });
-//   res.json({
-//     data: nodes
+//     const nodes = result.records.map(record => {
+//       return {
+//         m: record.get('m').properties,
+//         u: record.get('u').properties,
+//         u2: record.get('u2').properties,
+//         idm: record.get(`id(m)`).low
+//       };
+//     });
+//     res.json({
+//       data: nodes
+//     })
+//   }).then(() => {
+    
+
+//   }).catch(error => {
+//     console.log(error);
 //   })
-// }).then(() => {
-// }).catch(error => {
-//   console.log(error);
-// })
 // }
+
 // //Get message receive
 // exports.getMessReceive = async (req, res) => {
 //   req.session.readTransaction( async tx => {
@@ -42,6 +47,7 @@
 //   console.log(error);
 // })
 // }
+
 // //Send message
 // exports.sendMess = async (req, res) => {
 
@@ -82,16 +88,16 @@ exports.getMessSend = (req, res) => {
           u: record.get('u').properties,
           u2: record.get('u2').properties,
           idm: record.get(`id(m)`).low
-        }; 
-        
+        };
+
       }
       );
-     
+      console.log();
       res.json({
         data: nodes
       })
 
-     
+
     })
     .catch(error => console.error(error))
 }
@@ -119,6 +125,7 @@ exports.getMessReceive = (req, res) => {
     })
     .catch(error => console.error(error))
 }
+
 exports.sendMess = (req, res) => {
   const { messageInput, id, nodeId, time } = req.query;
   req.session
