@@ -24,6 +24,7 @@ export default function Post() {
       .finally(() => session.close());
     
     return () => driver.close();
+    
   }, []);
 
 

@@ -109,7 +109,7 @@ export default function EditPet() {
 
 
             <div className="relative z-0 w-full mb-6 group">
-              <input type="number" value={weight} onChange={(event) => setWeight(event.target.value)}
+              <input type="string" value={weight} onChange={(event) => setWeight(event.target.value)}
                 min="0" step="any" pattern="[0-9]+([\.][0-9]+)?" className="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 border-slate-800 appearance-none  focus:outline-none focus:ring-0 focus:border-slate-700 peer" placeholder="                  Unit of measurement is kilogram!" required />
               <label className="peer-focus:font-medium absolute text-sm  duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-slate-800 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Weight</label>
             </div>
