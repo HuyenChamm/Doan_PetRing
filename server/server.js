@@ -34,6 +34,8 @@ const chatRoutes = require('./router/chatRoutes');
 const personalpostRoutes = require('./router/personalpostRoutes');
 const acceptRoutes = require('./router/acceptRoutes');
 const zooRoutes = require('./router/zooRoutes');
+const searchpetRoutes = require('./router/searchpetRoutes');
+const petpageRoutes = require('./router/petpageRoutes')
 
 app.use((req, res, next) => {
   const session = driver.session();
@@ -60,8 +62,11 @@ app.use('/api/recommendfr',recommendfrRoutes);
 app.use('/api/personalpage',personalpageRoutes);
 app.use('/api/chat',chatRoutes);
 app.use('/api/personalpost',personalpostRoutes);
-app.use('/api/accept',acceptRoutes)
-app.use('/api/zoo',zooRoutes)
+app.use('/api/accept',acceptRoutes);
+app.use('/api/zoo',zooRoutes);
+app.use('/api/searchpet',searchpetRoutes);
+app.use('/api/petpage',petpageRoutes)
+
 /////////////
 server.listen(port, () => {
   console.log(`SERVER ${port} is run`);

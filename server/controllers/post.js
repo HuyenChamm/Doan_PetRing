@@ -3,7 +3,7 @@ const driver = require("../utils/db")
 exports.getAllPost = (req, res) => {
   const session = driver.session();
   const {post_setting} = req.query
-  const requestPubblic = post_setting ? `AND p.post_setting ='public'` : ``
+  const requestPubblic = post_setting ? `WHERE p.post_setting ='public'` : ``
 
   session
   .run(`MATCH (p:POST)-[n:POST]->(u:User)  ${requestPubblic} RETURN u,p,id(u),id(p)`)

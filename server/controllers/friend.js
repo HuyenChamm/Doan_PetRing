@@ -22,13 +22,13 @@ exports.getAllFriend = (req, res) => {
   console.log(id);
   session
   .run(`
-  MATCH (u1:User)-[:ADDFR]->(u2:User)-[:ACCEPT]->(u1:User) 
-  WHERE  id(u1) = ${id}
-  RETURN u1, u2 ,id(u2)
-  UNION
-  MATCH (u2:User)-[:ADDFR]->(u1:User)-[:ACCEPT]->(u2:User)
-  WHERE  id(u1) = ${id}
-  RETURN u1, u2 ,id(u2)
+    MATCH (u1:User)-[:ADDFR]->(u2:User)-[:ACCEPT]->(u1:User) 
+    WHERE  id(u1) = ${id}
+    RETURN u1, u2 ,id(u2)
+    UNION
+    MATCH (u2:User)-[:ADDFR]->(u1:User)-[:ACCEPT]->(u2:User)
+    WHERE  id(u1) = ${id}
+    RETURN u1, u2 ,id(u2)
   `)
   .then(data => {
     const nodes = data.records.map(record => 

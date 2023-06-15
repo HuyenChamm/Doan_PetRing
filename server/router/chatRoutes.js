@@ -7,13 +7,15 @@ const chatController = require('../controllers/chat')
 
 router.route('/')
 .post(chatController.sendMess)
+.get(chatController.getMess)
 
 
-router.route('/send')
-.get(chatController.getMessSend)
 
-router.route('/receive')
-.get(chatController.getMessReceive)
+// router.route('/send')
+// .get(chatController.getMessSend)
+
+// router.route('/receive')
+// .get(chatController.getMessReceive)
 
 
 module.exports = router;

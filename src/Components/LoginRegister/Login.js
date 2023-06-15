@@ -23,7 +23,7 @@ export default function Login(props) {
         else {
           Swal.fire({
             icon: 'error',
-            text: data.status,
+            text: "Incorrect password or username !",
           })
         }
       })

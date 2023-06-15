@@ -1,88 +1,15 @@
-// //Get message send
-// exports.getMessSend = async (req, res) => {
-//   const { params, nodeId } = req.query;
-//   req.session.readTransaction(async tx => {
-//     const result = await tx.run(`
-//   MATCH (u:User)-[:MESSAGE]-> (m:MESSAGE) -[:SEND]-> (u2:User)
-//     WHERE id(u) =${params} AND id(u2) = ${nodeId}  RETURN m,u,u2,id(m)
-//    `);
-//     const nodes = result.records.map(record => {
-//       return {
-//         m: record.get('m').properties,
-//         u: record.get('u').properties,
-//         u2: record.get('u2').properties,
-//         idm: record.get(`id(m)`).low
-//       };
-//     });
-//     res.json({
-//       data: nodes
-//     })
-//   }).then(() => {
 
 const driver = require("../utils/db");
 
-    
-
-//   }).catch(error => {
-//     console.log(error);
-//   })
-// }
-
-// //Get message receive
-// exports.getMessReceive = async (req, res) => {
-//   req.session.readTransaction( async tx => {
-//   const result = await tx.run(`
-//   MATCH (u:User)-[:MESSAGE]-> (m:MESSAGE) -[:SEND]-> (u2:User)
-//   WHERE id(u) = 2 AND id(u2) = 0  RETURN m,u,u2
-//    `);
-//   const nodes = result.records.map(record => {
-//             return { 
-//               m: record.get('m').properties, 
-//               u: record.get('u').properties, 
-//               u2: record.get('u2').properties, 
-//           };
-//         });
-//   res.json({
-//     data: nodes
-//   })
-// }).then(() => {
-// }).catch(error => {
-//   console.log(error);
-// })
-// }
-
-// //Send message
-// exports.sendMess = async (req, res) => {
-
-//   req.session.writeTransaction( async tx => {
-//   const result = await tx.run(`
-//   MATCH (u:User), (u2:User)
-//   WHERE id(u) = 0 AND id(u2) = 2
-//   CREATE (m:MESSAGE { message:'Hello MayA',send_at:'5/11/2023, 10:31:10 PM' })
-//   CREATE (u)-[:MESSAGE]->(m)-[:SEND]->(u2)
-//    `);
-//   const nodes = result.records.map(record => {
-//             return { 
-//               m: record.get('m').properties, 
-//               u: record.get('u').properties, 
-//               u2: record.get('u2').properties, 
-//           };
-//         });
-//   res.json({
-//     data: nodes
-//   })
-// }).then(() => {
-// }).catch(error => {
-//   console.log(error);
-// })}
-
-exports.getMessSend = (req, res) => {
+exports.getMess = (req, res) => {
   const session = driver.session();
-  const { id, idu } = req.query;
+  const {idu, id} = req.query;
+  console.log(id, idu,"mess");
   session
     .run(`
-    MATCH (u:User)-[:MESSAGE]-> (m:MESSAGE) -[:SEND]-> (u2:User)
-    WHERE id(u) =${id} AND id(u2) = ${idu}  RETURN m,u,u2,id(m)
+    MATCH (u:User)-[:MESSAGE]->(m:MESSAGE)-[:SEND]->(u2:User)
+    WHERE (id(u) = 1 AND id(u2) = 3) OR (id(u) = 3 AND id(u2) = 1)
+    RETURN u, m, u2,id(m)
   `)
     .then(data => {
       const nodes = data.records.map(record => {
@@ -100,46 +27,76 @@ exports.getMessSend = (req, res) => {
         data: nodes
       })
 
-
     })
     .catch(error => console.error(error))
 }
 
-exports.getMessReceive = (req, res) => {
-  const session = driver.session();
-  const { id, idu } = req.query;
-  session
-    .run(`
-  MATCH (u:User)-[:MESSAGE]-> (m:MESSAGE) -[:SEND]-> (u2:User)
-  WHERE id(u) = ${idu} AND id(u2) = ${id}  RETURN m,u,u2,id(m)
-  `)
-    .then(data => {
-      const nodes = data.records.map(record => {
-        return {
-          m: record.get('m').properties,
-          u: record.get('u').properties,
-          u2: record.get('u2').properties,
-          idm: record.get(`id(m)`).low
-        };
-      });
+// exports.getMessSend = (req, res) => {
+//   const session = driver.session();
+//   const { id, idu } = req.query;
+//   console.log(id, idu,"SEND");
+//   session
+//     .run(`
+//     MATCH (u:User)-[:MESSAGE]-> (m:MESSAGE) -[:SEND]-> (u2:User)
+//     WHERE id(u) =${id} AND id(u2) = ${idu}  RETURN m,u,u2,id(m)
+//   `)
+//     .then(data => {
+//       const nodes = data.records.map(record => {
+//         return {
+//           m: record.get('m').properties,
+//           u: record.get('u').properties,
+//           u2: record.get('u2').properties,
+//           idm: record.get(`id(m)`).low
+//         };
 
-      res.json({
-        data: nodes
-      })
-    })
-    .catch(error => console.error(error))
-}
+//       }
+//       );
+//       console.log();
+//       res.json({
+//         data: nodes
+//       })
+
+
+//     })
+//     .catch(error => console.error(error))
+// }
+
+// exports.getMessReceive = (req, res) => {
+//   const session = driver.session();
+//   const { id, idu } = req.query;
+//   session
+//     .run(`
+//   MATCH (u:User)-[:MESSAGE]-> (m:MESSAGE) -[:SEND]-> (u2:User)
+//   WHERE id(u) = ${idu} AND id(u2) = ${id}  RETURN m,u,u2,id(m)
+//   `)
+//     .then(data => {
+//       const nodes = data.records.map(record => {
+//         return {
+//           m: record.get('m').properties,
+//           u: record.get('u').properties,
+//           u2: record.get('u2').properties,
+//           idm: record.get(`id(m)`).low
+//         };
+//       });
+
+//       res.json({
+//         data: nodes
+//       })
+//     })
+//     .catch(error => console.error(error))
+// }
 
 exports.sendMess = (req, res) => {
   const session = driver.session();
   const { messageInput, id, idu, time } = req.query;
+  console.log(messageInput, id, idu, time);
   session
     .run(`
-  MATCH (u:User), (u2:User)
-  WHERE id(u) = ${id} AND id(u2) = ${idu}
-  CREATE (m:MESSAGE { message:'${messageInput}',send_at:'${time}' })
-  CREATE (u)-[:MESSAGE]->(m)-[:SEND]->(u2)
-  RETURN m,u,u2,id(m)
+    MATCH (u:User), (u2:User)
+    WHERE id(u) = ${id} AND id(u2) = ${idu}
+    CREATE (m:MESSAGE { message:'${messageInput}',send_at:'${time}'})
+    CREATE (u)-[:MESSAGE]->(m)-[:SEND]->(u2)
+    RETURN m,u,u2,id(m)
   `)
     .then(data => {
       const nodes = data.records.map(record => {
