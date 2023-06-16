@@ -8,7 +8,7 @@ exports.getMess = (req, res) => {
   session
     .run(`
     MATCH (u:User)-[:MESSAGE]->(m:MESSAGE)-[:SEND]->(u2:User)
-    WHERE (id(u) = 1 AND id(u2) = 3) OR (id(u) = 3 AND id(u2) = 1)
+    WHERE id(u) = ${id} AND id(u2) = ${idu} OR id(u) = ${idu} AND id(u2) = ${id}
     RETURN u, m, u2,id(m)
   `)
     .then(data => {

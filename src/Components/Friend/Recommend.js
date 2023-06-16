@@ -3,6 +3,7 @@ import apiGeneral from '../../api/apiGeneral';
 import AlertLogin from '../AlertLogin';
 import RecommendForPet from './RecommendForPet';
 import RecommendForFr from './RecommendForFr';
+import { Link } from 'react-router-dom';
 
 export default function Recommend(props) {
   const {isLoggedIn} = props
@@ -56,7 +57,8 @@ export default function Recommend(props) {
                   <img src={"/images/" + node.u.avt} className="w-16 h-16 rounded-full border-2 border-solid border-slate-900" alt="" />
                 </div>
                 <div className='pl-4 mt-2'>
-                  <p className='mb-1 font-bold'>{node.u.name}</p>
+                  <Link to={`/PersonalPage/${node.id}`} className='font-bold' > {node.u.name} </Link>
+                  {/* <p className='mb-1 font-bold'>{node.u.name}</p> */}
                   <p className=' text-slate-500'>{node.u.address}</p>
                 </div>
               </div>

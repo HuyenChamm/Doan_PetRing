@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import apiGeneral from '../../api/apiGeneral';
 import Swal from 'sweetalert2';
+import { Link } from 'react-router-dom';
 
 export default function ListAccept() {
 
@@ -63,7 +64,8 @@ export default function ListAccept() {
                         <img src={"/images/" + node.u.avt} className="w-16 h-16 rounded-full border-2 border-solid border-slate-900" alt="" />
                       </div>
                       <div className='pl-4 mt-2'>
-                        <p className='mb-1 font-bold'>{node.u.name}</p>
+                        {/* <p className='mb-1 font-bold'>{node.u.name}</p> */}
+                        <Link to={`/PersonalPage/${node.id}`} className='font-semibold' > {node.u.name} </Link>
                         <p className=' text-slate-500'>{node.u.address}</p>
                       </div>
                     </div>

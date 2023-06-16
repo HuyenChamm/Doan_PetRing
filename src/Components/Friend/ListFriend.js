@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import apiGeneral from '../../api/apiGeneral';
 import AlertLogin from '../AlertLogin';
+import { Link } from 'react-router-dom';
 
 export default function ListFriend(props) {
   const { isLoggedIn } = props
@@ -36,9 +37,12 @@ export default function ListFriend(props) {
               <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
                 {
                   nodes.map((node) => (
-                    <div className='item' key={node.u.id}>
+                    <div className='item' key={node.id}>
                       <img src={"/images/" + node.u.avt} className="mx-auto w-32 h-32 md:w-48 md:h-48 rounded-md " alt="" />
-                      <div className='text-center pt-3'><p className='font-semibold'>{node.u.name}</p></div>
+
+                      <div className='text-center pt-3'>
+                      <Link to={`/PersonalPage/${node.id}`} className='font-semibold' > {node.u.name} </Link>
+                      </div>
                     </div>
 
                   ))}

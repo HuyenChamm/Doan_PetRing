@@ -14,6 +14,14 @@ export default function Chat(props) {
   // const [sends, setSend] = useState([]);
   // const [receives, setReceives] = useState([]);
   //////
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setTimeout(function () {
+      window.location.href = "/Chat";
+    }, 500);
+  };
+
   const handleClick = (e) => {
     const id = e.target.id;
     setNodeId(id);
@@ -21,14 +29,12 @@ export default function Chat(props) {
     setIsModalOpen(true);
   }
   ///////////
-  const idu = nodeId;
-  console.log(idu,"iduuuuu");
   useEffect(() => {
     const str = document.cookie;
     const id = str.substring(3);
-    // const idu = nodeId;
-    console.log(idu,"iduuuuutrong");
-    apiGeneral({ url: '/api/chat', params: { idu, id } })
+    const idu = nodeId;
+  console.log("idu",idu);
+    apiGeneral({ url: `/api/chat`, params: {  id, idu } })
       .then(data => {
         setMess(data.data);
         console.log(data, "getmess");
@@ -39,31 +45,7 @@ export default function Chat(props) {
       console.log(id, idu, "chattttt");
       console.log(nodeId,"nodeId");
 
-    // apiGeneral({ url: '/api/chat/send', params: { idu, id } })
-    //   .then(data => {
-    //     setSend(data.data);
-    //     console.log(data,"Send");
-    //   })
-    //   .catch(error => {
-    //     console.log(error);
-    //   })
-
-    // socket.on("sendmess",(data) => {
-    //   // console.log(data.idp,postId);
-    //   setSend(oldData => [...oldData,data]);
-    // })
-    /////
-    // apiGeneral({ url: '/api/chat/receive', params: { idu, id } })
-    //   .then(data => {
-    //     setReceives(data.data);
-    //   })
-    //   .catch(error => {
-    //     console.log(error);
-    //   })
-
-
-    /////
-
+/////////
     apiGeneral({ url: `/api/friend/${id}` })
       .then(data => {
         setFriends(data.data);
@@ -71,17 +53,8 @@ export default function Chat(props) {
       .catch(error => {
         console.log(error);
       })
-  }, [])
-
-  ////////
-
-
-  const closeModal = () => {
-    setIsModalOpen(false);
-    setTimeout(function () {
-      window.location.href = "/Chat";
-    }, 500);
-  };
+      
+  }, [ ])
 
   /////////////////Send message function
   const [messageInput, setMessageInput] = useState('');
@@ -211,69 +184,23 @@ export default function Chat(props) {
                   <div className='boxchat px-4 '>
 
                     <div className='mx-auto bg-gray-400 rounded-md h-550'>
-
+                    
                       <div className='py-5 px-3 flex'>
                         <img src="/images/pet_7.jpg" className='w-16 h-16 rounded-full' alt="img" />
                         <div className='pl-3 pt-5 font-bold '>
-                          <p>User Name</p>
+                          {/* <p>{mess.u2.name}</p> */}
                         </div>
                       </div>
-
+                    
                       <div className='message-content px-5 h-73p md:h-70p mb-8 overflow-y-auto '>
                       {messs.sort((a, b) => a.idm - b.idm).map((mess) => (
                         <div className='user-left py-3 flex justify-end ' key={mess.idm}>
-
                           <div className='bg-slate-200 w-60p lg:w-2/5 px-3 pt-1 pb-3 rounded-xl text-sm md:text-base'>
-                            {/* <small className='text-xs text-slate-800'>{mess.u.name}</small>  */}
-                            <p className='mb-0 ' key={mess.idm}>{mess.idm} {mess.m.message}</p>
+                         
+                            <p className='mb-0 ' key={mess.idm}>{mess.idm} {mess.m.message} <span className='text-xs block'>{mess.u2.name} {mess.m.send_at} </span></p>
                           </div>
                         </div>
                         ))}
-
-
-                        {/* {messs.map((mess) => (
-                        <div className='user-left py-3 flex justify-start  ' key={mess.idm}>
-
-                          <div className='bg-slate-200 w-60p lg:w-2/5 px-3 pt-1 pb-3 rounded-xl text-sm md:text-base'>
-                            <small className='text-xs text-slate-800'>{mess.u2.name}</small> 
-                            <p className='mb-0 ' key={mess.idm}>{mess.idm}  {mess.m.message}</p>
-                          </div>
-                        </div>
-                        ))} */}
-
-                        {/* {sends.map((send) => (
-                          <div className='user-left py-3 flex justify-end ' key={send.idm}>
-
-                            <div className='bg-slate-200 w-60p lg:w-2/5 px-3 pt-1 pb-3 rounded-xl text-sm md:text-base'>
-                              <small className='text-xs text-slate-800'>{send.u.name}</small>
-                             
-                              <p className='mb-0 ' key={send.idm}>{send.m.message}{send.idm}</p>
-                            </div>
-                          </div>
-                        ))} */}
-
-                        {/* <div className='user-left py-3 flex justify-end '>
-                        <div className='bg-slate-200 w-60p lg:w-2/5 px-3 pt-1 pb-3 rounded-xl text-sm md:text-base'>
-                          <small className='text-xs text-slate-800'>Lyly</small>
-                          <p className='mb-0 '>Heloo Huyen Tram</p>
-                        </div>
-                        </div> */}
-
-                        {/* <div className='user-right py-3 flex justify-start ' >
-                              <div className='bg-slate-200 w-60p lg:w-2/5 p-3 rounded-xl text-sm md:text-base'>
-                                <small className='text-xs text-slate-800'>Huyen Tram</small>
-                                <p className='mb-0'>Hi ! LyLy</p>
-                              </div>
-                            </div> */}
-                        {/* {
-                          receives.map((receive) => (
-                            <div className='user-right py-3 flex justify-start ' key={receive.idm}>
-                              <div className='bg-slate-200 w-60p lg:w-2/5 p-3 rounded-xl text-sm md:text-base'>
-                                <small className='text-xs text-slate-800'>{receive.u.name}</small>
-                                <p className='mb-0'>{receive.m.message}</p>
-                              </div>
-                            </div>
-                          ))} */}
                       </div>
 
                       <div className='flex-col pb-10 -mt-5 mx-auto'>
