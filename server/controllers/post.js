@@ -57,7 +57,6 @@ exports.getAllPost = (req, res) => {
 exports.addPost = (req, res) => {
   const session = driver.session();
   const { id , imgp , content , time, option } = req.query
-  console.log(id , imgp , content ,time,  option ,"addpost");
   session
   .run(`
   MATCH (u:User) WHERE id(u) = ${id}
@@ -74,11 +73,6 @@ exports.addPost = (req, res) => {
         idp: record.get(`id(post)`).low
     }
     });
-  console.log(`
-  MATCH (u:User) WHERE id(u) = ${id}
-  CREATE (post:POST{content:'${content}',img:'${imgp}',datetime:'${time}',post_setting:'${option}'})
-  CREATE (post)-[:POST]->(u)
-  RETURN post`); 
     req.io.emit("addpost",nodes[0]) 
     res.json({
       data: nodes[0]

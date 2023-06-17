@@ -25,18 +25,18 @@ export default function Chat(props) {
   const handleClick = (e) => {
     const id = e.target.id;
     setNodeId(id);
-    console.log(id,"click");
+    console.log(id, "click");
     setIsModalOpen(true);
   }
   const ID = nodeId
-  console.log("nodeIDĐ",ID);
+  console.log("nodeIDĐ", ID);
   ///////////
   useEffect(() => {
     const str = document.cookie;
     const id = str.substring(3);
     const idu = ID;
-  console.log("iduuuuuuuuuuuuir",idu);
-    apiGeneral({ url: `/api/chat`, params: {  id, idu } })
+    console.log("iduuuuuuuuuuuuir", idu);
+    apiGeneral({ url: `/api/chat`, params: { id, idu } })
       .then(data => {
         setMess(data.data);
         console.log(data, "getmess");
@@ -45,17 +45,15 @@ export default function Chat(props) {
         console.log(error);
       })
 
-      // socket.on("sendmess",(data) => {
-      //   // console.log(data.idp,postId);
-      //   // if ( +postId === data.idp) {
-      //     setMess(oldData => [...oldData,data]);
-      //   // }
-      // })
+    socket.on("sendmess", (data) => {
+      setMess(oldData => [...oldData,data]);
+      
+    })
 
-      console.log(id, idu, "chattttt");
-      console.log(nodeId,"nodeId");
+    console.log(id, idu, "chattttt");
+    console.log(nodeId, "nodeId");
 
-/////////
+    /////////
     apiGeneral({ url: `/api/friend/${id}` })
       .then(data => {
         setFriends(data.data);
@@ -63,7 +61,7 @@ export default function Chat(props) {
       .catch(error => {
         console.log(error);
       })
-      
+
   }, [ID])
 
   /////////////////Send message function
@@ -73,8 +71,8 @@ export default function Chat(props) {
     const str = document.cookie;
     const id = str.substring(3);
     const idu = nodeId;
-    const ID = idu ;
-    console.log("IDD ",ID);
+    const ID = idu;
+    console.log("IDD ", ID);
     console.log(id, idu, "sendID");
     const currentTime = new Date().toLocaleString();
     timeRef.current = currentTime;
@@ -82,10 +80,6 @@ export default function Chat(props) {
     const time = timeRef.current;
 
     apiGeneral({ url: `/api/chat`, params: { messageInput, id, idu, time }, method: "POST" })
-      .then(data => {
-        setFriends(data.data);
-        console.log(data);
-      })
       .catch(error => {
         console.log(error);
       })
@@ -196,25 +190,26 @@ export default function Chat(props) {
                   <div className='boxchat px-4 '>
 
                     <div className='mx-auto bg-gray-400 rounded-md h-550'>
-                    
+
                       <div className='py-5 px-3 flex'>
                         <img src="/images/pet_7.jpg" className='w-16 h-16 rounded-full' alt="img" />
                         <div className='pl-3 pt-5 font-bold '>
                           {/* <p>{mess.u2.name}</p> */}
                         </div>
                       </div>
-                    
+
                       <div className='message-content px-5 h-73p md:h-70p mb-8 overflow-y-auto '>
-                      {messs.sort((a, b) => a.idm - b.idm).map((mess) => (
-                        <div className='user-left py-3 flex justify-end ' key={mess.idm}>
-                          <div className='bg-slate-200 w-60p lg:w-2/5 px-3 pt-1 pb-3 rounded-xl text-sm md:text-base'>
-                         
-                            <p className='mb-0 ' key={mess.idm}>{mess.idm} {mess.m.message} 
-                            <span className='text-xs block'>{mess.m.send_at} </span>
-                            </p>
+                        {messs.sort((a, b) => a.idm - b.idm).map((mess) => (
+                          <div className='user-left py-3 flex justify-end ' key={mess.idm}>
+                            <div className='bg-slate-200 w-60p lg:w-2/5 px-3 pt-1 pb-3 rounded-xl text-sm md:text-base'>
+
+                              <p className='mb-0 ' key={mess.idm}>{mess.idm} {mess.m.message}
+                                <span className='text-xs block'>{mess.m.send_at} </span>
+                              </p>
+                            </div>
                           </div>
-                        </div>
                         ))}
+                        
                       </div>
 
                       <div className='flex-col pb-10 -mt-5 mx-auto'>

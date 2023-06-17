@@ -16,7 +16,7 @@ export default function Post(props) {
 
     apiGeneral({ url: '/api/post', params })
       .then(data => {
-        setNodes(data.data);
+        // setNodes(data.data);
       })
       .catch(error => {
         console.log(error);

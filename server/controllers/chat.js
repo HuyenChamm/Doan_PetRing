@@ -22,7 +22,6 @@ exports.getMess = (req, res) => {
 
       }
       );
-      console.log();
       res.json({
         data: nodes
       })
@@ -107,9 +106,9 @@ exports.sendMess = (req, res) => {
           idm: record.get(`id(m)`).low
         };
       });
-      // req.io.emit("sendmess",nodes[0])
+      req.io.emit("sendmess",nodes[0])
       res.json({
-        data: nodes
+        data: nodes[0]
       })
     })
     .catch(error => console.error(error))
