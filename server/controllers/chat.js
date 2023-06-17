@@ -107,7 +107,7 @@ exports.sendMess = (req, res) => {
           idm: record.get(`id(m)`).low
         };
       });
-      // req.io.emit("sendmess",nodes)
+      // req.io.emit("sendmess",nodes[0])
       res.json({
         data: nodes
       })

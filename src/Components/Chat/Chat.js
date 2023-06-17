@@ -28,12 +28,14 @@ export default function Chat(props) {
     console.log(id,"click");
     setIsModalOpen(true);
   }
+  const ID = nodeId
+  console.log("nodeIDĐ",ID);
   ///////////
   useEffect(() => {
     const str = document.cookie;
     const id = str.substring(3);
-    const idu = nodeId;
-  console.log("idu",idu);
+    const idu = ID;
+  console.log("iduuuuuuuuuuuuir",idu);
     apiGeneral({ url: `/api/chat`, params: {  id, idu } })
       .then(data => {
         setMess(data.data);
@@ -42,6 +44,14 @@ export default function Chat(props) {
       .catch(error => {
         console.log(error);
       })
+
+      // socket.on("sendmess",(data) => {
+      //   // console.log(data.idp,postId);
+      //   // if ( +postId === data.idp) {
+      //     setMess(oldData => [...oldData,data]);
+      //   // }
+      // })
+
       console.log(id, idu, "chattttt");
       console.log(nodeId,"nodeId");
 
@@ -54,7 +64,7 @@ export default function Chat(props) {
         console.log(error);
       })
       
-  }, [ ])
+  }, [ID])
 
   /////////////////Send message function
   const [messageInput, setMessageInput] = useState('');
@@ -63,6 +73,8 @@ export default function Chat(props) {
     const str = document.cookie;
     const id = str.substring(3);
     const idu = nodeId;
+    const ID = idu ;
+    console.log("IDD ",ID);
     console.log(id, idu, "sendID");
     const currentTime = new Date().toLocaleString();
     timeRef.current = currentTime;
@@ -197,7 +209,9 @@ export default function Chat(props) {
                         <div className='user-left py-3 flex justify-end ' key={mess.idm}>
                           <div className='bg-slate-200 w-60p lg:w-2/5 px-3 pt-1 pb-3 rounded-xl text-sm md:text-base'>
                          
-                            <p className='mb-0 ' key={mess.idm}>{mess.idm} {mess.m.message} <span className='text-xs block'>{mess.u2.name} {mess.m.send_at} </span></p>
+                            <p className='mb-0 ' key={mess.idm}>{mess.idm} {mess.m.message} 
+                            <span className='text-xs block'>{mess.m.send_at} </span>
+                            </p>
                           </div>
                         </div>
                         ))}
