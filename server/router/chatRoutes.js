@@ -11,11 +11,11 @@ router.route('/')
 
 
 
-// router.route('/send')
-// .get(chatController.getMessSend)
+router.route('/send')
+.get(chatController.getMessSend)
 
-// router.route('/receive')
-// .get(chatController.getMessReceive)
+router.route('/receive')
+.get(chatController.getMessReceive)
 
 
 module.exports = router;

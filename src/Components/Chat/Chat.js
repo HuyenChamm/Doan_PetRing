@@ -29,6 +29,8 @@ export default function Chat(props) {
     setIsModalOpen(true);
   }
   const ID = nodeId
+  const str = document.cookie;
+    const IDD = str.substring(3);
   console.log("nodeIDĐ", ID);
   ///////////
   useEffect(() => {
@@ -46,8 +48,9 @@ export default function Chat(props) {
       })
 
     socket.on("sendmess", (data) => {
-      setMess(oldData => [...oldData,data]);
       
+      setMess(oldData => [...oldData,data]);
+    
     })
 
     console.log(id, idu, "chattttt");
@@ -61,8 +64,37 @@ export default function Chat(props) {
       .catch(error => {
         console.log(error);
       })
+    //////
+    // apiGeneral({ url: `/api/chat/send`, params: { id, idu } })
+    //   .then(data => {
+    //     setSend(data.data);
+    //     console.log(data, "getmess");
+    //   })
+    //   .catch(error => {
+    //     console.log(error);
+    //   })
 
-  }, [ID])
+    // socket.on("sendmess", (data) => {
+      
+    //   setSend(oldData => [...oldData, data]);
+    //   console.log("setSend",setSend);
+    // })
+    // /////////////
+    // apiGeneral({ url: `/api/chat/receive`, params: { id, idu } })
+    //   .then(data => {
+    //     setReceives(data.data);
+    //     console.log(data, "getmess");
+    //   })
+    //   .catch(error => {
+    //     console.log(error);
+    //   })
+
+    // socket.on("sendmess", (data) => {
+    //   setReceives(oldData => [...oldData, data]);
+    // })
+    //////
+  }, [ID,IDD])
+  ////////////////
 
   /////////////////Send message function
   const [messageInput, setMessageInput] = useState('');
@@ -199,19 +231,36 @@ export default function Chat(props) {
                       </div>
 
                       <div className='message-content px-5 h-73p md:h-70p mb-8 overflow-y-auto '>
+
                         {messs.sort((a, b) => a.idm - b.idm).map((mess) => (
                           <div className='user-left py-3 flex justify-end ' key={mess.idm}>
-                            <div className='bg-slate-200 w-60p lg:w-2/5 px-3 pt-1 pb-3 rounded-xl text-sm md:text-base'>
 
-                              <p className='mb-0 ' key={mess.idm}>{mess.idm} {mess.m.message}
-                                <span className='text-xs block'>{mess.m.send_at} </span>
+                            <div className={`mess ${mess.idu == IDD ? 'mr-0' : 'mr-60p'}  bg-slate-200 w-60p  lg:w-2/5 px-3 pt-1 pb-3 rounded-xl text-sm md:text-base`}>
+                            <span className='text-xs block text-slate-700'> {mess.name}</span>
+                              <p className='mb-0 text-black' key={mess.idm}> {mess.m}
+                                <span className='text-xs block'>{mess.time} </span>
                               </p>
                             </div>
                           </div>
                         ))}
-                        
-                      </div>
 
+                        {/* {sends.sort((a, b) => a.idm - b.idm).map((send) => (
+                        <div className='send ml-60p  bg-slate-200 w-60p lg:w-2/5 mt-3 px-3 pt-1 pb-3 rounded-xl text-sm md:text-base'>
+                          <p className='mb-0 ' key={send.idm}> {send.m.message}
+                            <span className='text-xs block'>{send.m.send_at} </span>
+                          </p>
+                        </div>
+                        ))}
+
+                        {receives.sort((a, b) => a.idm - b.idm).map((receive) => (
+                        <div className='receive  bg-slate-200 w-60p lg:w-2/5 mt-3 px-3 pt-1 pb-3 rounded-xl text-sm md:text-base'>
+                          <p className='mb-0 ' key={receive.idm} > {receive.m.message}
+                            <span className='text-xs block'>{receive.m.send_at} </span>
+                          </p>
+                        </div>
+                        ))} */}
+                      </div>
+                      
                       <div className='flex-col pb-10 -mt-5 mx-auto'>
                         <input type="text" value={messageInput} onChange={(event) => setMessageInput(event.target.value)}
                           name="" id="" className='w-4/6 md:w-10/12 lg:w-11/12 ml-3 rounded-lg' />
