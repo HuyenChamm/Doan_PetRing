@@ -16,6 +16,7 @@ export default function Search(props) {
     .catch(error =>{
       console.log(error);
     })
+
   }
 
   useEffect( ()=>{

@@ -48,9 +48,7 @@ export default function Chat(props) {
       })
 
     socket.on("sendmess", (data) => {
-      
       setMess(oldData => [...oldData,data]);
-    
     })
 
     console.log(id, idu, "chattttt");

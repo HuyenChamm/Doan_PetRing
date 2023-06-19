@@ -32,7 +32,7 @@ export default function PersonalPost(props) {
           timer: 3000
         })
         setTimeout(function () {
-          window.location.href = `/`;
+          window.location.href = `/PersonalPage/${id}`;
         }, 5000);
 
       })

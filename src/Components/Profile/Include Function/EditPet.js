@@ -9,7 +9,7 @@ export default function EditPet() {
   let { id } = useParams();
   const [name, setName] = useState('');
   const [age, setAge] = useState('');
-  const [type, setType] = useState('');
+  const [type, setType] = useState('dog');
   const [weight, setWeight] = useState('');
   const [desc, setDescription] = useState('');
   const navigate = useNavigate();

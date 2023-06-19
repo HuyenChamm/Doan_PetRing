@@ -5,7 +5,7 @@ export default function CreatePost(props) {
   const [nodes, setNodes] = useState([]);
 
   const [content, setContent] = useState('');
-  const [option, setOption] = useState('');
+  const [option, setOption] = useState('public');
 
   const { isLoggedIn } = props;
   
@@ -98,14 +98,13 @@ const handleAddPost = (e) => {
               <div className='w-24 mt-4 -ml-2'>
                   <select   value={option} onChange={(event) => setOption(event.target.value)} 
                    className="bg-gray-50 border border-slate-600 text-gray-900 text-xs rounded-full block w-full px-2.5">
-
-                    <option value="public">Public</option>
+                    <option value="public" selected >Public</option>
                     <option value="private">Private</option>
                   </select>
                 </div>
             </div>
               <textarea value={content} onChange={(event) => setContent(event.target.value)} 
-              placeholder='User name, bạn đang nghĩ gì thế ?' 
+              
               className="resize-y rounded-md border-solid border-2 border-slate-600 w-48 px-2 down_md:my-5 md:w-80 lg:w-96 xl:w-664"></textarea>
             </div>
             <div className='text-center'>

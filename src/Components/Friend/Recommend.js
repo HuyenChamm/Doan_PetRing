@@ -31,7 +31,6 @@ export default function Recommend(props) {
     const id = e.target.id;
     apiGeneral({ url:`/api/recommend` , params: {id , idadd} ,method:"post"})
     .then(data => {
-      alert("OK")
       setNodes (data.data);
       console.log(data);
     })

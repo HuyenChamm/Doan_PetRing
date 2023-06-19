@@ -29,7 +29,7 @@ export default function AddComment(props) {
           <form className='w-4/5 m-auto md:flex justify-between mt-10  ' onSubmit={handleComment}>
             <div className='flex w-full  md:w-4/5'>
               <textarea type='text' value={content} onChange={(event) => setContent(event.target.value)} 
-                placeholder='User name, bạn đang nghĩ gì thế ?' 
+                placeholder='...' 
                 className="resize-y rounded-md border-solid border-2 border-slate-900 px-2 w-full">
               </textarea>
             </div>
