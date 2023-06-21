@@ -3,10 +3,9 @@ import apiGeneral from '../../api/apiGeneral';
 import AlertLogin from '../AlertLogin';
 import { Link, useParams } from 'react-router-dom';
 import PersonalPost from '../Post/PersonalPost';
-import PagePost from '../Post/PagePost';
 
 
-export default function PersonalPage(props) {
+export default function Page(props) {
   const { isLoggedIn } = props
   const [results, setResults] = useState([]);
   let { id } = useParams();
@@ -59,8 +58,7 @@ export default function PersonalPage(props) {
             <li><a href="/ListFriend">List Friends</a></li>
           </ul>
         </div> */}
-          {/* <PersonalPost id={result.id}/> */}
-          <PagePost id={result.id}/>
+        <PersonalPost id={result.id}/> 
             </div>
             ))} 
          

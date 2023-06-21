@@ -110,7 +110,8 @@ exports.sendMess = (req, res) => {
           idm: record.get(`idm`).low
         };
       });
-      req.io.emit("sendmess",nodes[0])
+      console.log( nodes);
+      req.io.emit("sendmess",nodes[0]);
       res.json({
         data: nodes[0]
       })

@@ -6,7 +6,8 @@ exports.recommendpet = (req, res) => {
  
   session
   .run(`MATCH (me:User), (user:User), (pet:Pet)
-        WHERE NOT (me)-[:FRIEND]-(user) 
+        WHERE NOT (me)-[:ACCEPT]-(user) 
+        AND NOT (user)-[:ACCEPT]-(me) 
         AND id(me) = ${id} 
         AND NOT id(user) = ${id}
         AND (user)-[:OWNER]->(pet)

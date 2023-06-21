@@ -121,7 +121,7 @@ export default function ProfileUser(props) {
                 <a href='/ProfilePet'
                   className="text-white shadow-sm shadow-slate-400 bg-slate-700 hover:bg-slate-800 font-medium rounded-md text-sm ml-4  px-5 py-1 text-center mr-3">Profile Pet</a>
 
-                  <Link to={`/PersonalPage/${id}`}
+                  <Link to={`/Page/${id}`}
                   className="text-white shadow-sm shadow-slate-400 bg-slate-700 hover:bg-slate-800 font-medium rounded-md text-sm ml-4  px-5 py-1 text-center mr-3">Edit Post</Link>
               </div>
             </div>

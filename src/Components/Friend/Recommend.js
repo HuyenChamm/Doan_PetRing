@@ -75,7 +75,7 @@ export default function Recommend(props) {
 
         </div>
       </div>
-      {/* <RecommendForPet/> */}
+      <RecommendForPet/>
       {/* <RecommendForFr/> */}
      </div>
       

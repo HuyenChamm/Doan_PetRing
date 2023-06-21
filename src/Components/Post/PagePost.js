@@ -1,12 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import apiGeneral from '../../api/apiGeneral';
-import Swal from 'sweetalert2';
-import { Link } from 'react-router-dom';
-import ListComment from './ListComment';
 
-
-
-export default function PersonalPost(props) {
+export default function PagePost(props) {
   const [nodes, setNodes] = useState([]);
 
   const { id } = props;
@@ -16,34 +11,12 @@ export default function PersonalPost(props) {
     apiGeneral({ url: `/api/personalpost/${id}` })
       .then(data => {
         setNodes(data.data);
-      
       })
       .catch(error => {
         console.log(error);
       })
   }, [])
-  ///////
-  const handleDelete = async (event) => {
-    const idp = event.target.id;
-    console.log(id, "idddđ", idp, "a");
-    apiGeneral({ url: `/api/personalpost`, params: { idp }, method: "delete" })
-      .then(() => {
-        Swal.fire({
-          icon: 'success',
-          title: 'Delete success',
-          showConfirmButton: false,
-          timer: 3000
-        })
-        setTimeout(function () {
-          window.location.href = `/PersonalPage/${id}`;
-        }, 5000);
-
-      })
-      .catch(error => console.error(error));
-  }
-
-
-  //////
+ 
 
   return (
     <div className='container text-slate-900'>
@@ -66,16 +39,7 @@ export default function PersonalPost(props) {
                     </div>
                   </div>
 
-                  <div className='pr-3'>
-                   
-                  <Link  to={`/EditPost/${node.idp}`} 
-                      className='px-4 py-1  ml-3 rounded-l-sm text-orange-400 m-0 bg-white border-2 border-solid  border-orange-400'><i id={node.idp} className="fa-solid fa-pen-to-square"></i>
-                    </Link>
-                    
-                    <button type="submit" onClick={handleDelete} id={node.idp}
-                      className='px-4 py-1  ml-3 rounded-l-sm text-orange-400 m-0 bg-white border-2 border-solid  border-orange-400'><i id={node.idp} className="fa-solid fa-trash"></i>
-                    </button>
-                  </div>
+                
                 </div>
 
               </div>
@@ -87,7 +51,7 @@ export default function PersonalPost(props) {
                 <img src={"/images/" + node.post.img} className="mx-auto w-48 md:w-96 " alt="" />
               </div>
 
-          
+             
             </div>
           </div>
 

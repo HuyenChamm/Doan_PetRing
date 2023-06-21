@@ -41,13 +41,14 @@ export default function Chat(props) {
     apiGeneral({ url: `/api/chat`, params: { id, idu } })
       .then(data => {
         setMess(data.data);
-        console.log(data, "getmess");
+        // console.log(data, "getmess");
       })
       .catch(error => {
         console.log(error);
       })
 
     socket.on("sendmess", (data) => {
+      console.log("sEndmesssss",data);
       setMess(oldData => [...oldData,data]);
     })
 
@@ -62,35 +63,6 @@ export default function Chat(props) {
       .catch(error => {
         console.log(error);
       })
-    //////
-    // apiGeneral({ url: `/api/chat/send`, params: { id, idu } })
-    //   .then(data => {
-    //     setSend(data.data);
-    //     console.log(data, "getmess");
-    //   })
-    //   .catch(error => {
-    //     console.log(error);
-    //   })
-
-    // socket.on("sendmess", (data) => {
-      
-    //   setSend(oldData => [...oldData, data]);
-    //   console.log("setSend",setSend);
-    // })
-    // /////////////
-    // apiGeneral({ url: `/api/chat/receive`, params: { id, idu } })
-    //   .then(data => {
-    //     setReceives(data.data);
-    //     console.log(data, "getmess");
-    //   })
-    //   .catch(error => {
-    //     console.log(error);
-    //   })
-
-    // socket.on("sendmess", (data) => {
-    //   setReceives(oldData => [...oldData, data]);
-    // })
-    //////
   }, [ID,IDD])
   ////////////////
 
@@ -134,7 +106,7 @@ export default function Chat(props) {
 
                   <div className='flex   border border-solid  border-slate-400 p-3 rounded-md'>
                     <div >
-                      <img src="/images/avt_1.jpg" className="mx-auto ml-0 mr-14 w-12 h-12  shadow-md rounded-full shadow-slate-400" alt="" />
+                      <img src="/images/avt_6.jpg" className="mx-auto ml-0 mr-14 w-12 h-12  shadow-md rounded-full shadow-slate-400" alt="" />
                     </div>
                     <div className=''>
                       <p className='mb-2'><strong>User name</strong></p>
@@ -147,7 +119,7 @@ export default function Chat(props) {
                   </div>
                   <div className='flex   border border-solid  border-slate-400 p-3 rounded-md'>
                     <div >
-                      <img src="/images/avt_1.jpg" className="mx-auto ml-0 mr-14 w-12 h-12  shadow-md rounded-full shadow-slate-400" alt="" />
+                      <img src="/images/avt_4.jpg" className="mx-auto ml-0 mr-14 w-12 h-12  shadow-md rounded-full shadow-slate-400" alt="" />
                     </div>
                     <div className=''>
                       <p className='mb-2'><strong>User name</strong></p>
@@ -160,7 +132,7 @@ export default function Chat(props) {
                   </div>
                   <div className='flex   border border-solid  border-slate-400 p-3 rounded-md'>
                     <div >
-                      <img src="/images/avt_1.jpg" className="mx-auto ml-0 mr-14 w-12 h-12  shadow-md rounded-full shadow-slate-400" alt="" />
+                      <img src="/images/avt_3.jpg" className="mx-auto ml-0 mr-14 w-12 h-12  shadow-md rounded-full shadow-slate-400" alt="" />
                     </div>
                     <div className=''>
                       <p className='mb-2'><strong>User name</strong></p>

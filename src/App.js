@@ -33,6 +33,9 @@ import EditPet from './Components/Profile/Include Function/EditPet';
 import ListAccept from './Components/Friend/ListAccept';
 import Zoo from './Components/Profile/Zoo';
 import PetPage from './Components/Profile/PetPage';
+import Page from './Components/Profile/Page';
+import PagePost from './Components/Post/PagePost';
+import EditPost from './Components/Post/Include Function/EditPost';
 
 
 export const IsLoggedInContext = React.createContext(false)
@@ -75,13 +78,14 @@ function App() {
       <Route path='/Custom' element={<Custom/>}></Route>
       <Route path='/Connect' element={<Connect/>}></Route>
       <Route path='/Zoo' element={<Zoo socket = {socket}/>}></Route>
-
+      <Route path='/EditPost/:id' element={<EditPost/>}></Route>
       <Route path='/EditPet/:id' element={<EditPet/>}></Route>
       {/* <Route path='/Post' element={<Post isLoggedIn= {isLoggedIn} />}></Route> */}
       {/* <Route path='/ListComment' element={<ListComment/>}></Route> */}
       <Route path='/Like' element={<Like/>}></Route>
       <Route path='/ListAccept' element={<ListAccept/>}></Route>
       <Route path='/PersonalPage/:id' element={<PersonalPage isLoggedIn= {isLoggedIn} />}></Route>
+      <Route path='/Page/:id' element={<Page isLoggedIn= {isLoggedIn} />}></Route>
       <Route path='/PetPage/:id' element={<PetPage  isLoggedIn= {isLoggedIn}/>}></Route>
       <Route path='/Pet/:id' element={<Pet isLoggedIn= {isLoggedIn} />}></Route>
       <Route path='/Recommend' element={<Recommend isLoggedIn= {isLoggedIn}/>}></Route>
@@ -93,6 +97,7 @@ function App() {
       <Route path='/RecommendForPet' element={<RecommendForPet/>}></Route>
       <Route path='/Advertisement' element={<Advertisement/>}></Route>
       <Route path='/PersonalPost' element={<PersonalPost isLoggedIn= {isLoggedIn}   socket = {socket} />}></Route>
+      <Route path='/PagePost' element={<PagePost isLoggedIn= {isLoggedIn}   socket = {socket} />}></Route>
     </Routes></IsLoggedInContext.Provider>
     <Footer/>
   </div>

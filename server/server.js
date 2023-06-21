@@ -35,7 +35,8 @@ const personalpostRoutes = require('./router/personalpostRoutes');
 const acceptRoutes = require('./router/acceptRoutes');
 const zooRoutes = require('./router/zooRoutes');
 const searchpetRoutes = require('./router/searchpetRoutes');
-const petpageRoutes = require('./router/petpageRoutes')
+const petpageRoutes = require('./router/petpageRoutes');
+const pageRoutes = require('./router/pageRoutes')
 
 app.use((req, res, next) => {
   const session = driver.session();
@@ -66,6 +67,7 @@ app.use('/api/accept',acceptRoutes);
 app.use('/api/zoo',zooRoutes);
 app.use('/api/searchpet',searchpetRoutes);
 app.use('/api/petpage',petpageRoutes)
+app.use('/api/page',pageRoutes)
 
 /////////////
 server.listen(port, () => {
