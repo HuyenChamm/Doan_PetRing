@@ -15,7 +15,7 @@ export default function Register() {
   const [email, setEmail] = useState('');
   const [address, setAddress] = useState('');
   const [phone, setPhone] = useState('');
-  const [gender, setGender] = useState('');
+  const [gender, setGender] = useState('female');
   const [dob, setDOB] = useState('');
   const [username, setUsername] = useState('');
   const [pass, setPass] = useState('');
@@ -124,6 +124,7 @@ export default function Register() {
                     <option value="male">Male</option>
                     <option value="other">Other</option>
                   </select>
+                  
                 </div>
               </div>
               <div className="grid md:grid-cols-2 md:gap-6">

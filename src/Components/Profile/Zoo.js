@@ -81,7 +81,9 @@ export default function Zoo(props) {
               <div className='item relative' key={node.id}>
                 <img src={"/images/" + node.p.img} className="w-90p h-80 rounded-md " alt="" />
                 <div className='text-slate-900 absolute bottom-0 rounded-sm backdrop-blur-3xl w-90p'>
-                  <div className='text-center pt-2'><p className='font-semibold mb-2'>{node.p.name}</p></div>
+                  <div className='text-center pt-2'>
+                  <Link to={`/PetPage/${node.id}`} className='font-semibold mb-2'>{node.p.name}</Link>
+                  </div>
                   <div className='text-xs mx-2'>
                     <p className='mb-2'>
                       Hello! My name is <span>{node.p.name}</span>. I'm a <span>{node.p.type}</span>. My weight is <span>{node.p.weight}</span>. Now, I'm <span>{node.p.age}</span>

@@ -11,6 +11,7 @@ exports.recommend = async (req, res) => {
     AND NOT (u2:User)-[:ADDFR]->(u1:User)-[:ACCEPT]->(u2:User)
     AND NOT (u1:User)-[:ADDFR]->(u2:User)
     AND id(u1) = ${id} AND NOT id(u2) = ${id} 
+    AND u1.address = u2.address
     RETURN u2, id(u2)
         `)
   .then(data => {
