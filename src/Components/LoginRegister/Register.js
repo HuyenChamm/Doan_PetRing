@@ -100,7 +100,7 @@ export default function Register() {
             </div>
             <div className="grid md:grid-cols-2 md:gap-6"> 
               <div className="relative z-0 w-full mb-6 group">
-                <input type="password" value={pass} onChange={(event) => setPass(event.target.value)} className="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 border-slate-900 appearance-none  focus:outline-none focus:ring-0 focus:border-white peer" placeholder=" " required />
+                <input type="password" value={pass} onChange={(event) => setPass(event.target.value)} className="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 border-slate-900 appearance-none  focus:outline-none focus:ring-0 focus:border-white peer" placeholder=" " required pattern='(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$'/>
                 <label htmlFor="floating_password" className="peer-focus:font-medium absolute text-sm  duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-white  peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Password</label>
               </div>
               <div className="relative z-0 w-full mb-6 group">
@@ -141,7 +141,7 @@ export default function Register() {
                 </div>
                 <div>
                   <input typeof='file' accept=".jpg, .jpeg, .png, .gif" ref={inputRef} onChange={handleInputChange} className='hidden' type="file"/>
-                  {selectedFile && (
+                  { selectedFile && (
                     <p className='text-xs mb-0 mt-1'>{`${selectedFile.name} `}</p>
                   )}
                 </div>

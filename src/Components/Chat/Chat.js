@@ -32,8 +32,10 @@ export default function Chat(props) {
   const str = document.cookie;
     const IDD = str.substring(3);
   console.log("nodeIDĐ", ID);
-  ///////////
-  useEffect(() => {
+//////
+  ////////////////
+  useEffect(() =>{
+
     const str = document.cookie;
     const id = str.substring(3);
     const idu = ID;
@@ -46,25 +48,34 @@ export default function Chat(props) {
       .catch(error => {
         console.log(error);
       })
+  
+  
+    console.log(id, idu, "chattttt");
+    console.log(nodeId, "nodeId");
+
+    //////
+    apiGeneral({ url: `/api/friend/${id}` })
+    .then(data => {
+      setFriends(data.data);
+    })
+    .catch(error => {
+      console.log(error);
+    })
+
+    
+  },[ID,IDD])
+
+  ///////////
+  useEffect(() => {
+    // const str = document.cookie;
+    // const id = str.substring(3);
 
     socket.on("sendmess", (data) => {
       console.log("sEndmesssss",data);
       setMess(oldData => [...oldData,data]);
     })
+  }, [])
 
-    console.log(id, idu, "chattttt");
-    console.log(nodeId, "nodeId");
-
-    /////////
-    apiGeneral({ url: `/api/friend/${id}` })
-      .then(data => {
-        setFriends(data.data);
-      })
-      .catch(error => {
-        console.log(error);
-      })
-  }, [ID,IDD])
-  ////////////////
 
   /////////////////Send message function
   const [messageInput, setMessageInput] = useState('');
