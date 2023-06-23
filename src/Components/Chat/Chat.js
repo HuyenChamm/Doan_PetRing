@@ -5,7 +5,7 @@ import AlertLogin from '../AlertLogin';
 
 export default function Chat(props) {
   const { isLoggedIn, socket } = props;
-
+  const containerRef = useRef(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [friends, setFriends] = useState([]);
   const [nodeId, setNodeId] = useState(null);
@@ -61,8 +61,8 @@ export default function Chat(props) {
     .catch(error => {
       console.log(error);
     })
+ 
 
-    
   },[ID,IDD])
 
   ///////////
@@ -211,7 +211,7 @@ export default function Chat(props) {
                         </div>
                       </div>
 
-                      <div className='message-content px-5 h-73p md:h-70p mb-8 overflow-y-auto '>
+                      <div  className='message-content px-5 h-73p md:h-70p mb-8 overflow-y-auto '>
 
                         {messs.sort((a, b) => a.idm - b.idm).map((mess) => (
                           <div className='user-left py-3 flex justify-end ' key={mess.idm}>
