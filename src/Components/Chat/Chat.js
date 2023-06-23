@@ -5,7 +5,7 @@ import AlertLogin from '../AlertLogin';
 
 export default function Chat(props) {
   const { isLoggedIn, socket } = props;
-  const containerRef = useRef(null);
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [friends, setFriends] = useState([]);
   const [nodeId, setNodeId] = useState(null);
